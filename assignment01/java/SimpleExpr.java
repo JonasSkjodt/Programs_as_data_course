@@ -41,7 +41,7 @@ class Var extends Expr {
 
   @Override
   public String toString() {
-      return x;
+      return "" + x;
   }
 }
 
@@ -85,6 +85,11 @@ class Add extends Expr {
   public int eval(Map<String,Integer> env) {
     return e1.eval(env) + e2.eval(env);
   }
+
+  @Override
+  public String toString() {
+    return e1.toString() + "+" + e2.toString();
+  }
 }
 
 class Mul extends Expr {
@@ -97,6 +102,11 @@ class Mul extends Expr {
   public int eval(Map<String,Integer> env) {
     return e1.eval(env) * e2.eval(env);
   }
+
+  @Override
+  public String toString() {
+    return e1.toString() + "*" + e2.toString();
+  }
 }
 
 class Sub extends Expr {
@@ -108,6 +118,11 @@ class Sub extends Expr {
 
   public int eval(Map<String,Integer> env) {
     return e1.eval(env) - e2.eval(env);
+  }
+
+  @Override
+  public String toString() {
+    return e1.toString() + "-" + e2.toString();
   }
 }
 
@@ -125,6 +140,7 @@ public class SimpleExpr {
     env0.put("c", 78);
     env0.put("baf", 666);
     env0.put("b", 111);
+    env0.put("z", 12);
     // System.out.println(e1.eval(env0));
     // System.out.println(e2.eval(env0));
     // System.out.println(e3.eval(env0));
