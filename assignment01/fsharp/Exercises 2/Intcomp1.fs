@@ -10,7 +10,7 @@ module Intcomp1
 type expr = 
   | CstI of int
   | Var of string
-  | Let of string * expr * expr
+  | Let of (string * expr) list * expr
   | Prim of string * expr * expr;;
 
 (* Some closed expressions: *)
@@ -42,17 +42,42 @@ let rec lookup env x =
 let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i            -> i
-    | Var x             -> lookup env x 
-    | Let(x, erhs, ebody) -> 
-      let xval = eval erhs env
-      let env1 = (x, xval) :: env 
-      eval ebody env1
+    | Var x             -> lookup env x
+    | Let(xList, body)  ->
+          let rec evalBind env xList =
+              match xList with
+              | [] -> env
+              | (x, e)::xr ->
+                  let xval = eval e env
+                  let env1 = (x, xval) :: env
+                  evalBind env1 xr
+          let env1 = evalBind env xList
+          eval body env1
+
+    // old code
+    // | Let(x, erhs, ebody) -> 
+    //   let xval = eval erhs env
+    //   let env1 = (x, xval) :: env 
+    //   eval ebody env1
+    
+
     | Prim("+", e1, e2) -> eval e1 env + eval e2 env
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
     | Prim _            -> failwith "unknown primitive";;
 
-let run e = eval e [];;
+//let run e = eval e [];;
+
+
+let test1 = Let([("z", Prim("-", CstI 5, CstI 4)); ("p", Prim("-", CstI 6, CstI 4))],  Prim("*", CstI 100, Var "z"))
+let test1v = eval test1 []
+
+let test2 = Let([("z", Prim("*", CstI 5, CstI 4)); ("p", Prim("*", CstI 6, CstI 4))],  Prim("*", CstI 50, Var "z"))
+let test2v = eval test2 []
+
+let test3 = Let([("z", Prim("+", CstI 6, CstI 4)); ("p", Prim("+", CstI 5, CstI 4))],  Prim("-", Var "z", Var "p"))
+let test3v = eval test3 []
+
 
 (* ---------------------------------------------------------------------- *)
 
