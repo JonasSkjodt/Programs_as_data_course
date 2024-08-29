@@ -101,12 +101,7 @@ let e11 = If(Var "a", CstI 11, CstI 22);;
 let e11v = eval e11 env;; 
     
 
-//1.1, 1.2, 1.4, 2.1, 2.2, 2.3
-
 // 1.2 (i)
-// Then x ∗ (y + 3) is represented as Mul(Var "x", Add(Var "y",
-// CstI 3)), not as Prim("*", Var "x", Prim("+", Var "y",
-// CstI 3))
 type aexpr =
   | CstI of int
   | Var of string
@@ -124,16 +119,86 @@ let ae2 = Mul(CstI 2, Sub(Var "v", Add(Var "w", Var "z")))
 let ae3 = Add(Add(Add(Var "x", Var "y"), Var "z"), Var "v")
 
 // 1.2 (iii)
-// Write an F# function fmt : aexpr -> string to format expressions
-// as strings. For instance, it may format Sub(Var "x", CstI 34) as the
-// string "(x - 34)". It has very much the same structure as an eval function, but takes no environment argument (because the name of a variable is
-// independent of its value).
-
-let rec fmt (ae: aexpr) string =
+let rec fmt ae : string =
     match ae with
-    | CstI i            -> i
-    | Var x             -> x
-    | Add ae1 ae        -> "(" + (fmt ae1) + "+" + (fmt ae2) + ")" 
-    | Sub ae1 ae        -> "(" + (fmt ae1) + "-" + (fmt ae2) + ")" 
-    | mul ae1 ae        -> "(" + (fmt ae1) + "*" + (fmt ae2) + ")" 
-    
+    | CstI i                -> string i
+    | Var x                 -> x
+    | Add(ae1, ae2)         -> "(" + (fmt ae1) + "+" + (fmt ae2) + ")"
+    | Sub(ae1, ae2)         -> "(" + (fmt ae1) + "-" + (fmt ae2) + ")"
+    | Mul(ae1, ae2)         -> "(" + (fmt ae1) + "*" + (fmt ae2) + ")"
+    | _                     -> failwith "error"
+
+let aeOutput = Sub(Var "x", CstI 34)
+
+// 1.2 (iii) inputs
+let ae4 = CstI 3
+let ae4v = fmt ae4
+
+let ae5 = Var "b"
+let ae5v = fmt ae5
+
+let ae6v = fmt ae1
+let ae7v = fmt ae2
+let ae8v = fmt ae3
+
+// 1.2 (iv)
+let simplify sim : aexpr =
+  match sim with
+  | Add(ae1, ae2)         -> match ae1, ae2 with
+                              | CstI 0, ae2     -> ae2
+                              | ae1, CstI 0     -> ae1
+                              | CstI 0, CstI 0  -> CstI 0 
+                              | _               -> Add(ae1, ae2)
+  
+  | Sub(ae1, ae2)         -> match ae1, ae2 with
+                              | CstI 0, ae2     -> ae2
+                              | ae1, CstI 0     -> ae1
+                              | ae1, ae2 when ae1 = ae2 -> CstI 0
+                              | CstI 0, CstI 0  -> CstI 0 
+                              | _               -> Sub(ae1, ae2)
+                               
+  | Mul(ae1, ae2)         ->  match ae1, ae2 with
+                              | CstI 1, ae2     -> ae2
+                              | ae1, CstI 1     -> ae1
+                              | CstI 1, CstI 1  -> CstI 1 
+                              | CstI 0, ae2     -> CstI 0
+                              | ae1, CstI 0     -> CstI 0
+                              | CstI 0, CstI 0  -> CstI 0
+                              | _               -> Mul(ae1, ae2)
+
+
+let sim1 = Sub(CstI 7, CstI 7)
+let sim1v = simplify(sim1)
+
+let sim2 = Add(CstI 5, CstI 0)
+let sim2v = simplify(sim2)
+
+let sim3 = Mul(CstI 0, CstI 7)
+let sim3v = simplify(sim3)
+
+// 1.2 (v)
+//TODO: save this one for later
+// Write an F# function to perform symbolic differentiation of simple arithmetic
+// expressions (such as aexpr) with respect to a single variable
+let rec diff (ae : aexpr) (x : string) : aexpr =
+    match ae with
+    | CstI i                -> CstI 0
+    | Var y when y = x      -> CstI 1
+    | Var y                 -> CstI 0
+    | Add(ae1, ae2)         -> Add(diff ae1 x, diff ae2 x)
+    | Sub(ae1, ae2)         -> Sub(diff ae1 x, diff ae2 x)
+    | Mul(ae1, ae2)         -> Add(Mul(diff ae1 x, ae2), Mul(ae1, diff ae2 x))
+
+// let f something : aexpr =
+//   function
+//   | Add(ae1, ae2) -> Add(function ae1) + (function ae2)
+//   | Sub
+
+
+
+
+
+
+
+
+//1.1, 1.2, 1.4, 2.1, 2.2, 2.3
