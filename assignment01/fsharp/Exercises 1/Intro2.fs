@@ -177,7 +177,6 @@ let sim3 = Mul(CstI 0, CstI 7)
 let sim3v = simplify(sim3)
 
 // 1.2 (v)
-//TODO: save this one for later
 // Write an F# function to perform symbolic differentiation of simple arithmetic
 // expressions (such as aexpr) with respect to a single variable
 let rec diff (ae : aexpr) (x : string) : aexpr =
@@ -188,17 +187,3 @@ let rec diff (ae : aexpr) (x : string) : aexpr =
     | Add(ae1, ae2)         -> Add(diff ae1 x, diff ae2 x)
     | Sub(ae1, ae2)         -> Sub(diff ae1 x, diff ae2 x)
     | Mul(ae1, ae2)         -> Add(Mul(diff ae1 x, ae2), Mul(ae1, diff ae2 x))
-
-// let f something : aexpr =
-//   function
-//   | Add(ae1, ae2) -> Add(function ae1) + (function ae2)
-//   | Sub
-
-
-
-
-
-
-
-
-//1.1, 1.2, 1.4, 2.1, 2.2, 2.3
