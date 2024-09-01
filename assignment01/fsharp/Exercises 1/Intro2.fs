@@ -17,7 +17,6 @@ let rec lookup env x =
 
 let cvalue = lookup env "c";;
 
-
 (* Object language expressions with variables *)
 
 type expr = 

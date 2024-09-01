@@ -281,10 +281,10 @@ type texpr =                            (* target expressions *)
 
 (* Map variable name to variable index at compile-time *)
 
-let rec getindex vs x = // ["z"; "y"] "y"
+let rec getindex vs x = // (when running tc1): ["z"; "y"] "y"
     match vs with 
     | []    -> failwith "Variable not found"
-    | y::yr -> if x = y then 0 else 1 + getindex yr x;;  // getindex [] "y" -> 2
+    | y::yr -> if x = y then 0 else 1 + getindex yr x;;  // (when running tc1): getindex [] "y" -> 2
 
 // let testing = getindex ["z"; "y"] "y";;
 
@@ -299,41 +299,32 @@ let rec getindex vs x = // ["z"; "y"] "y"
 let rec tcomp (e : expr) (cenv : string list) : texpr =
     match e with
     | CstI i -> TCstI i
-    | Var x  -> TVar (getindex cenv x) //getindex ["z"; "y"] "y"
+    | Var x  -> TVar (getindex cenv x) // (when running tc1): getindex [ "y"; "z"] "y"
     // new code
     | Let(xList, body) ->
         let rec tcompBind cenv xList =
               match xList with
-              //| [] -> cenv
-              //| (x, e) :: xr -> // TLet(CstI 5, TLet(CstI 6, TPrim(ope, (TVar 1), (TVar 0)))
-                  // TLet 
-                  // let first = tcomp e cenv
-                  // let bindRest = tcompBind (x :: cenv) xr
-                  //let second = tcomp body bindRest
-                  // TLet(first, bindRest)
-        //           tcompBind (x :: cenv) xr
-        // let listOfAllVars = tcompBind cenv xList
-              | [] -> tcomp body cenv
-              | (x, e) :: xr ->
-                  let first = tcomp e cenv
-                  let second = tcompBind (x :: cenv) xr
+              | [] -> tcomp body cenv // (when running tc1): tcomp (Prim("*", Var "y", Var "z")) ["y", "z"] -> TPrim(ope, (TVar 0), (TVar 1))
+              | (x, e) :: xr -> 
+                  let first = tcomp e cenv // (when running tc1): tcomp CstI 5 [] -> TCstI 5 
+                  let second = tcompBind (x :: cenv) xr // (when running tc1): tcompBind ("z" :: []) [("y", CstI 6)]
                   TLet(first, second)
         tcompBind cenv xList
         
     // old code
     // | Let(x, erhs, ebody) -> 
-    //   let cenv1 = x :: cenv // "z" :: ["y"] -> [ "z"; "y"]I
-    //   TLet(tcomp erhs cenv, tcomp ebody cenv1) // TLet (TCst 17, TPrim(ope, (TVar 1), (TVar 0))
+    //   let cenv1 = x :: cenv // "z" :: ["y"] -> [ "z"; "y"]
+    //   TLet(tcomp erhs cenv, tcomp ebody cenv1) // TLet (TCst 17, TPrim(ope, (TVar 0), (TVar 1))
       
-    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);; // TPrim(ope, (TVar 1), (TVar 0))
+    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);; // TPrim(ope, (TVar 0), (TVar 1))
 
-// old 
+// old tests
 // let tc1 = Let("z", CstI 17, Prim("+", Var "y", Var "z"));;
 // let tc1v = tcomp tc1 ["y"] // -> TLet (TCst 17, TPrim("+", (TVar 1), (TVar 0))
 
 
 let tc1 = Let([("z", CstI 5); ("y", CstI 6) ],  Prim("*", Var "y", Var "z"))
-let tc1v = tcomp tc1 []
+let tc1v = tcomp tc1 [] // TLet(CstI 5, TLet(CstI 6, TPrim("+", (TVar 0), (TVar 1)))
 
 (* Evaluation of target expressions with variable indexes.  The
    run-time environment renv is a list of variable values (ints).  *)
