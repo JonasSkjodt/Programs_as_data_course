@@ -304,19 +304,22 @@ let rec tcomp (e : expr) (cenv : string list) : texpr =
     | Let(xList, body) ->
         let rec tcompBind cenv xList =
               match xList with
-              | [] -> cenv
-              | (x, e) :: xr ->
+              //| [] -> cenv
+              //| (x, e) :: xr -> // TLet(CstI 5, TLet(CstI 6, TPrim(ope, (TVar 1), (TVar 0)))
+                  // TLet 
                   // let first = tcomp e cenv
                   // let bindRest = tcompBind (x :: cenv) xr
                   //let second = tcomp body bindRest
                   // TLet(first, bindRest)
-                  tcompBind (x :: cenv) xr
-                  
-        let listOfAllVars = tcompBind cenv xList
-        let first = tcomp e cenv
-        let second = tcomp body listOfAllVars
-        TLet(first, second)
-    
+        //           tcompBind (x :: cenv) xr
+        // let listOfAllVars = tcompBind cenv xList
+              | [] -> tcomp body cenv
+              | (x, e) :: xr ->
+                  let first = tcomp e cenv
+                  let second = tcompBind (x :: cenv) xr
+                  TLet(first, second)
+        tcompBind cenv xList
+        
     // old code
     // | Let(x, erhs, ebody) -> 
     //   let cenv1 = x :: cenv // "z" :: ["y"] -> [ "z"; "y"]I
