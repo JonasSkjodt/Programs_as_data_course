@@ -110,11 +110,11 @@ type aexpr =
 
 
 // 1.2 (ii)
-//v − (w + z)
+// (How it looks like) v − (w + z)
 let ae1 = Sub(Var "v", Add(Var "w", Var "z"))
-// 2*(v-(w+z))
+// (How it looks like) 2*(v-(w+z))
 let ae2 = Mul(CstI 2, Sub(Var "v", Add(Var "w", Var "z")))
-// x + y + z + v 
+// (How it looks like) x + y + z + v 
 let ae3 = Add(Add(Add(Var "x", Var "y"), Var "z"), Var "v")
 
 // 1.2 (iii)
@@ -125,7 +125,7 @@ let rec fmt ae : string =
     | Add(ae1, ae2)         -> "(" + (fmt ae1) + "+" + (fmt ae2) + ")"
     | Sub(ae1, ae2)         -> "(" + (fmt ae1) + "-" + (fmt ae2) + ")"
     | Mul(ae1, ae2)         -> "(" + (fmt ae1) + "*" + (fmt ae2) + ")"
-    | _                     -> failwith "error"
+    | _                     -> failwith "fmt error"
 
 let aeOutput = Sub(Var "x", CstI 34)
 
@@ -141,6 +141,7 @@ let ae7v = fmt ae2
 let ae8v = fmt ae3
 
 // 1.2 (iv)
+// simplify the expression
 let simplify sim : aexpr =
   match sim with
   | Add(ae1, ae2)         -> match ae1, ae2 with

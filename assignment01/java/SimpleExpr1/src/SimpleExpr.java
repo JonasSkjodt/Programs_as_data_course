@@ -22,9 +22,7 @@ class CstI extends Expr {
   }
   
   public Expr simplify() {
-    
     return this;
-  
   }
 
   public int compareTo(CstI e2) {
@@ -75,7 +73,7 @@ class Add extends Expr {
   public Expr simplify() {
       Expr se1 = e1.simplify();
       Expr se2 = e2.simplify();
-      if (se1 instanceof CstI && ((CstI) se1).i == 0) return se2;
+      if (se1 instanceof CstI && ((CstI) se1).i == 0) return se2; 
       if (se2 instanceof CstI && ((CstI) se2).i == 0) return se1;
       return new Add(se1, se2);
   }
