@@ -1,0 +1,8 @@
+Exercise 3.2
+Write a regular expression that recognizes all sequences consisting of a and b
+where two a’s are always separated by at least one b. For instance, these four strings
+are legal: b, a, ba, ababbbaba; but these two strings are illegal: aa, babaa.
+Construct the corresponding NFA. Try to find a DFA corresponding to the NFA.
+
+regex: (b*ab|b)*a?
+NFA to DFA (see attachment picture ex3_2_nfa_to_dfa.jpg)
