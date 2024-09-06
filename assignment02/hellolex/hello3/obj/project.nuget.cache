@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "v/RSpObEKGDOxLloDlClcj0TW6HzuO7i9G1CIpMK+e/jBcAM/ooyAaEcrwN/HC0qVNZd8l8UqsKdgDv0M8X3ag==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jonas\\Desktop\\Programs as data\\Programs_as_data_course\\assignment02\\hellolex\\hello3\\hello3.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jonas\\.nuget\\packages\\fsharp.core\\8.0.200\\fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

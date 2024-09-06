@@ -1,0 +1,43 @@
+question 1:
+['0'-'9'] is a regular expression and  LexBuffer<char>.LexemeString lexbuf is the semantics for it
+
+
+question 2:
+there are 3 states, state 0, state 1, and state 3
+
+question 3:
+we put in 9
+the lexer recognizes 9
+
+Question 4:
+we put in 90
+the lexer recognizes 90
+
+Question 5:
+we put 1.22
+the lexer recognizes 1.22
+
+Question 6:
+The regex determines it. I.e because it expect any length of integer where there can be a '.' with a least one integer behind
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// extra for the terminal
+// alias fslex="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
+// alias fsyacc="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
+
+//enter the hellolex folder and write the following
+//fslex --unicode hello.fsl
+
+//fsyacc --module Hello_fslex <PATH_TO_FILE>.fsy
