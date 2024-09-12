@@ -1,3 +1,23 @@
+Commands:
+
+//wsl
+to put the aliases into wsl https://medium.com/@hello.ash99/setting-up-aliases-in-wsl-4db7bc3083c3
+after you set it up use:
+source /home/.bashrc
+
+alias fslex="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
+alias fsyacc="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
+alias pad="cd ... [your path]"
+
+
+
+fsyacc --module ExprPar ExprPar.fsy
+fslex --unicode ExprLex.fsl
+dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Absyn.fs ExprPar.fs ExprLex.fs Parse.fs
+
+
+
+
 Exercise 3.3 Write out the rightmost derivation of the string below from the expression grammar at the end of
 Sect. 3.6.6, corresponding to ExprPar.fsy. Take note of the sequence of grammar rules (A–I) used.
 
@@ -52,6 +72,7 @@ z                                           Expr ::= NAME                       
 
 
 Exercise 3.4 Draw the above derivation as a tree.
+See picture 3_4 or use https://miro.com/app/board/uXjVLfqvZys=/
 
 Exercise 3.5 Get expr.zip from the book homepage and unpack it. Using a command prompt, generate (1) the lexer and (2) the parser for expressions by running
 fslex and fsyacc; then (3) load the expression abstract syntax, the lexer and

@@ -33,11 +33,23 @@ The regex determines it. I.e because it expect any length of integer where there
 
 
 
-// extra for the terminal
-// alias fslex="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
-// alias fsyacc="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
+// extra for the terminal (bash)
+alias fslex="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
+alias fsyacc="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
+
+//wsl
+to put the aliases into wsl https://medium.com/@hello.ash99/setting-up-aliases-in-wsl-4db7bc3083c3
+after you set it up use:
+source /home/.bashrc
+
+alias fslex="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
+alias fsyacc="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
 
 //enter the hellolex folder and write the following
 //fslex --unicode hello.fsl
-
 //fsyacc --module Hello_fslex <PATH_TO_FILE>.fsy
+
+
+fsyacc --module ExprPar ExprPar.fsy
+$ fslex --unicode ExprLex.fsl
+dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Absyn.fs ExprPar.fs ExprLex.fs Parse.fs
