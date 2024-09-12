@@ -15,58 +15,39 @@ Expr ::= NAME rule B
     | Expr MINUS Expr rule I
 
 
+Note:
 
-Answer:
+Which way is the optimal way of writing exercise 3.3? we've left two ways of doing it beneath and assigned it 3.3.1 and 3.3.2
+(our answer is 3.3.1, but we've left 3.3.2 up)
 
-let z = (17) in z + 2 * 3 end EOF
+3.3.1:
 
-Input                                       parse stack                                         Details
-------------------------------------------- ----------------------------------------------      -------------------------------------------
-let z = (17) in z + 2 * 3 end EOF          Main (Rule A)                                        We looked at EOF (since we're going right to left)
-let z = (17) in z + 2 * 3 end              LET z EQ (17) IN z + 2 * 3 END (Rule F) Main         We inserted the correct inputs for the expressions for understanding
-3                                          LET z EQ (17) IN z + 2 * Expr (Rule C) END Main    
-2                                          LET z EQ (17) IN z + Expr * Expr (Rule C) END Main
-2 * 3                                      LET z EQ (17) IN z + Expr (Rule G) END Main           
-z                                          LET z EQ (17) IN Expr (Rule B) + Expr END Main
-z + Expr                                   LET z EQ (17) IN Expr (Rule H) END Main
-(17)                                       LET z EQ Expr (Rule E) IN Expr END Main
-z                                          LET Expr (Rule B) EQ Expr IN Expr END Main
-reduse                                     Expr Main (Rule F)
+Main
+Expr EOF                                            (Rule A)
+Expr TIMES Expr                                     (Rule G)
+Expr TIMES CSINT 3                                  (Rule C)
+CSINT 2 TIMES CSINT 3                               (Rule C) 
+Expr PLUS CSINT 2 TIMES CSINT 3                     (Rule H)
+LPAR Expr RPAR PLUS CSINT 2 TIMES CSINT 3           (Rule E)
+LPAR CSINT 17 RPAR PLUS CSINT 2 TIMES CSINT 3       (Rule C)
+LET Expr IN NAME z PLUS CSINT 2 TIMES CSINT 3 END   (Rule F)
+LET NAME z IN NAME z PLUS CSINT 2 TIMES CSINT 3 END (Rule B)
 
+3.3.2:
 
-
-
-
-Example from 3.6.6
-Main ::= Expr EOF rule A
-Expr ::= NAME rule B
-    | CSTINT rule C
-    | MINUS CSTINT rule D
-    | LPAR Expr RPAR rule E
-    | LET NAME EQ Expr IN Expr END rule F
-    | Expr TIMES Expr rule G
-    | Expr PLUS Expr rule H
-    | Expr MINUS Expr rule I
-
-
-
-Answer:
-
-let z = (17) in z + 2 * 3 end EOF
-
-Input                                       parse stack                                         Details
-------------------------------------------- ----------------------------------------------      -------------------------------------------
-let z = (17) in z + 2 * 3 end EOF          Main                                 (Rule A)                                        
-let z = (17) in z + 2 * 3 end              LET z EQ (17) IN z + 2 * 3 END       (Rule F)              
-3                                          CSTINT                               (Rule C)    
-2                                          CSTINT                               (Rule C) 
-3*2                                        Expr * Expr                          (Rule G)
-z                                          Expr ::= NAME                        (Rule B)
-z+2                                        Expr + Expr                          (Rule H)
-z+2*3                                      Expr PLUS Expr                       (rule H)
-17                                         CSTINT                               (rule C)
-(17)                                       LPAR Expr RPAR                       (rule E)
-z                                          Expr ::= NAME                        (rule B)
+Input                                       parse stack                                         
+------------------------------------------- ---------------------------------------------- 
+let z = (17) in z + 2 * 3 end EOF           Main                                 (Rule A)                                        
+let z = (17) in z + 2 * 3 end               LET z EQ (17) IN z + 2 * 3 END       (Rule F)              
+3                                           CSTINT                               (Rule C)    
+2                                           CSTINT                               (Rule C) 
+3*2                                         Expr TIMES Expr                      (Rule G)
+z                                           Expr ::= NAME                        (Rule B)
+z+2                                         Expr PLUS Expr                       (Rule H)
+z+expr                                      Expr PLUS Expr                       (rule H)
+17                                          CSTINT                               (rule C)
+(17)                                        LPAR Expr RPAR                       (rule E)
+z                                           Expr ::= NAME                        (rule B)
 
 
 
