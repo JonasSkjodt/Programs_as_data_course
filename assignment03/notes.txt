@@ -1,21 +1,3 @@
-Commands:
-
-//wsl
-to put the aliases into wsl https://medium.com/@hello.ash99/setting-up-aliases-in-wsl-4db7bc3083c3
-after you set it up use:
-source /home/.bashrc
-
-alias fslex="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
-alias fsyacc="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
-alias pad="cd ... [your path]"
-
-fsyacc --module ExprPar ExprPar.fsy
-fslex --unicode ExprLex.fsl
-dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Absyn.fs ExprPar.fs ExprLex.fs Parse.fs
-
-
-
-
 Exercise 3.3 
 
 let z = (17) in z + 2 * 3 end EOF
@@ -33,7 +15,6 @@ Expr ::= NAME rule B
 
 
 Note:
-
 Which way is the optimal way of writing exercise 3.3? we've left two ways of doing it beneath and assigned it 3.3.1 and 3.3.2
 (our answer is 3.3.1, but we've left 3.3.2 up)
 
@@ -69,12 +50,21 @@ z                                           Expr ::= NAME                       
 
 
 Exercise 3.4
-See picture 3_4 or use https://miro.com/app/board/uXjVLfqvZys=/
+See picture 3_4.png or use https://miro.com/app/board/uXjVLfqvZys=/
 
 Exercise 3.5 
-See picture 3_5
+See picture 3_5.png
 
 Exercise 3.6
+See picture 3_6.png
 
+We used
 
-Exercise 3.7 
+let test = compString "let x = 5 in x + 5 end";;
+
+as a test and got the following output
+
+val test: List<sinstr> = [SCstI 5; SVar 0; SCstI 5; SAdd; SSwap; SPop]
+
+Exercise 3.7
+

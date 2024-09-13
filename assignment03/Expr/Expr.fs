@@ -347,19 +347,13 @@ let checkIfValid (str : string) : bool =
       | expr -> true
       | _ -> false
 
-
 let compString (str : string) : sinstr List =
       match checkIfValid str with
       | true -> scomp (fromString str) []
       | false -> failwith "fail at compString"
 
-
-      (*if checkIfValid str then
-            scomp (fromString str) []
-      else*) 
-
-
-
+//test for compstring
+//let test = compString "let x = 5 in x + 5 end"
 
       (*
 let fromString (str : string) : expr =
@@ -385,4 +379,5 @@ e1 ? e2 : e3
 
 Some documentation for fslex and fsyacc is found in this chapter and in Expert
 F# [17].*)
+
 //---------------------------------------------------------------------//
