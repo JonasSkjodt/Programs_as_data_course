@@ -7,17 +7,13 @@
 
   <ItemGroup>
     <Compile Include="Absyn.fs" />
+    <Compile Include="Parse.fs" />
     <Compile Include="Expr.fs" />
     <Compile Include="ExprLex.fs" />
     <Compile Include="ExprPar.fs" />
-    <Compile Include="Parse.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FSPowerPack.Core.Community" Version="3.0.0" />
   </ItemGroup>
 </Project>

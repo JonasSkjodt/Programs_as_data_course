@@ -55,19 +55,6 @@
             "locale": "zh-Hant"
           }
         }
-      },
-      "FSPowerPack.Core.Community/3.0.0": {
-        "type": "package",
-        "compile": {
-          "Lib/Net40/FSharp.PowerPack.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "Lib/Net40/FSharp.PowerPack.dll": {
-            "related": ".xml"
-          }
-        }
       }
     }
   },
@@ -113,39 +100,10 @@
         "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll"
       ]
-    },
-    "FSPowerPack.Core.Community/3.0.0": {
-      "sha512": "x5jhAZY0HwTB1/MAfWcfRbroKjoHgyjRpjjx2VEZwzvcQLK2MAq/me8o2xux2+Gqac9T8MidzkYpUpIYIgp+5Q==",
-      "type": "package",
-      "path": "fspowerpack.core.community/3.0.0",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Lib/Net20/FSharp.PowerPack.dll",
-        "Lib/Net20/FSharp.PowerPack.xml",
-        "Lib/Net40/FSharp.PowerPack.dll",
-        "Lib/Net40/FSharp.PowerPack.xml",
-        "Lib/sl3-wp/FSharp.PowerPack.Compatibility.dll",
-        "Lib/sl3-wp/FSharp.PowerPack.dll",
-        "Lib/sl3/FSharp.PowerPack.Compatibility.dll",
-        "Lib/sl3/FSharp.PowerPack.dll",
-        "Lib/sl4-windowsphone71/FSharp.PowerPack.Compatibility.dll",
-        "Lib/sl4-windowsphone71/FSharp.PowerPack.dll",
-        "Lib/sl4/FSharp.PowerPack.Compatibility.dll",
-        "Lib/sl4/FSharp.PowerPack.dll",
-        "Lib/sl5/FSharp.PowerPack.Compatibility.dll",
-        "Lib/sl5/FSharp.PowerPack.Linq.dll",
-        "Lib/sl5/FSharp.PowerPack.dll",
-        "fspowerpack.core.community.3.0.0.nupkg.sha512",
-        "fspowerpack.core.community.nuspec",
-        "tools/install.ps1"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "FSPowerPack.Core.Community >= 3.0.0",
       "FSharp.Core >= 8.0.400"
     ]
   },
@@ -155,9 +113,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj",
-      "projectName": "Expr",
-      "projectPath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj",
+      "projectUniqueName": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj",
+      "projectName": "Exprproj",
+      "projectPath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj",
       "packagesPath": "/root/.nuget/packages/",
       "outputPath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/obj/",
       "projectStyle": "PackageReference",
@@ -187,10 +145,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "FSPowerPack.Core.Community": {
-            "target": "Package",
-            "version": "[3.0.0, )"
-          },
           "FSharp.Core": {
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
@@ -217,17 +171,5 @@
         "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/250/sdk/8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'FSPowerPack.Core.Community 3.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "libraryId": "FSPowerPack.Core.Community",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }

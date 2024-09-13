@@ -1,22 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "aLy4p8aHv/Y=",
+  "dgSpecHash": "NAHSd+NUlok=",
   "success": true,
-  "projectFilePath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj",
+  "projectFilePath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj",
   "expectedPackageFiles": [
-    "/root/.nuget/packages/fsharp.core/8.0.400/fsharp.core.8.0.400.nupkg.sha512",
-    "/root/.nuget/packages/fspowerpack.core.community/3.0.0/fspowerpack.core.community.3.0.0.nupkg.sha512"
+    "/root/.nuget/packages/fsharp.core/8.0.400/fsharp.core.8.0.400.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'FSPowerPack.Core.Community 3.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
-      "libraryId": "FSPowerPack.Core.Community",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

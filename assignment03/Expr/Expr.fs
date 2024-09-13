@@ -6,8 +6,9 @@ module Expr
 
 open System.IO
 open Absyn
+open Parse //for fromString used in compString
 
-(* From file expr/expr.sml * Simple arithmetic expressions *)
+    (* From file expr/expr.sml * Simple arithmetic expressions *)
  
 let e1 = Let("z", CstI 17, Prim("+", Var "z", Var "z"));
 
@@ -335,4 +336,53 @@ let intsToFile (inss : int list) (fname : string) =
     System.IO.File.WriteAllText(fname, text);;
 
 
+//---------------------------------------------------------------------//
+(*Exercise 3.6 Use the expression parser from Parse.fs and the compiler scomp
+(from expressions to stack machine instructions) and the associated datatypes from
+Expr.fs, to define a function compString : string -> sinstr list
+that parses a string as an expression and compiles it to stack machine code.*)
+
+let checkIfValid (str : string) : bool =
+      match fromString str with
+      | expr -> true
+      | _ -> false
+
+
+let compString (str : string) : sinstr List =
+      match checkIfValid str with
+      | true -> scomp (fromString str) []
+      | false -> failwith "fail at compString"
+
+
+      (*if checkIfValid str then
+            scomp (fromString str) []
+      else*) 
+
+
+
+
+      (*
+let fromString (str : string) : expr =
+    let lexbuf = LexBuffer<char>.FromString(str)
+    try 
+      ExprPar.Main ExprLex.Token lexbuf
+    with 
+      | exn -> let pos = lexbuf.EndPos 
+               failwithf "%s near line %d, column %d\n" 
+                  (exn.Message) (pos.Line+1) pos.Column
+      )
+
+(Exercise 3.7 Extend the expression language abstract syntax and the lexer and
+parser specifications with conditional expressions. The abstract syntax should be
+If(e1, e2, e3), so modify file Absyn.fs as well as ExprLex.fsl and
+file ExprPar.fsy. The concrete syntax may be the keyword-laden F#/ML-style:
+
+if e1 then e2 else e3
+
+or the more light-weight C/C++/Java/C#-style:
+
+e1 ? e2 : e3
+
+Some documentation for fslex and fsyacc is found in this chapter and in Expert
+F# [17].*)
 //---------------------------------------------------------------------//

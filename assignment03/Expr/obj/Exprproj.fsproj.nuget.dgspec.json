@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj": {}
+    "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj": {}
   },
   "projects": {
-    "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj": {
+    "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj",
-        "projectName": "Expr",
-        "projectPath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Expr.fsproj",
+        "projectUniqueName": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj",
+        "projectName": "Exprproj",
+        "projectPath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/Exprproj.fsproj",
         "packagesPath": "/root/.nuget/packages/",
         "outputPath": "/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment03/expr/obj/",
         "projectStyle": "PackageReference",
@@ -39,10 +39,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "FSPowerPack.Core.Community": {
-              "target": "Package",
-              "version": "[3.0.0, )"
-            },
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",

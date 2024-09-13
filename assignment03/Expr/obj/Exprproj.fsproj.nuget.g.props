@@ -13,7 +13,6 @@
     <SourceRoot Include="/root/.nuget/packages/" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgFSPowerPack_Core_Community Condition=" '$(PkgFSPowerPack_Core_Community)' == '' ">/root/.nuget/packages/fspowerpack.core.community/3.0.0</PkgFSPowerPack_Core_Community>
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/root/.nuget/packages/fsharp.core/8.0.400</PkgFSharp_Core>
   </PropertyGroup>
 </Project>
