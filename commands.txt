@@ -17,9 +17,6 @@ For assigment 3.6
 dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Absyn.fs ExprPar.fs ExprLex.fs Parse.fs Expr.fs
 
 
-
-
-
 (old)
 // extra for the terminal (bash)
 alias fslex="dotnet C:/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"

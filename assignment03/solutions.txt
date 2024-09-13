@@ -1,19 +1,5 @@
 Exercise 3.3 
 
-let z = (17) in z + 2 * 3 end EOF
-
-Example from 3.6.6
-Main ::= Expr EOF rule A
-Expr ::= NAME rule B
-    | CSTINT rule C
-    | MINUS CSTINT rule D
-    | LPAR Expr RPAR rule E
-    | LET NAME EQ Expr IN Expr END rule F
-    | Expr TIMES Expr rule G
-    | Expr PLUS Expr rule H
-    | Expr MINUS Expr rule I
-
-
 Note:
 Which way is the optimal way of writing exercise 3.3? we've left two ways of doing it beneath and assigned it 3.3.1 and 3.3.2
 (our answer is 3.3.1, but we've left 3.3.2 up)
@@ -58,13 +44,6 @@ See picture 3_5.png
 Exercise 3.6
 See picture 3_6.png
 
-We used
-
-let test = compString "let x = 5 in x + 5 end";;
-
-as a test and got the following output
-
-val test: List<sinstr> = [SCstI 5; SVar 0; SCstI 5; SAdd; SSwap; SPop]
-
 Exercise 3.7
-
+You can see the extended functionalty in ExprPar.fsy and ExprLex.fsl.
+we've only added the F#/ML-style: IF THEN ELSE, we didnt add the lightweight C/C++/Java/C#-style versions.
