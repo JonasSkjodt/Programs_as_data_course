@@ -309,7 +309,9 @@ let rec scomp e (cenv : rtvalue list) : sinstr list =
       | Prim("-", e1, e2) -> 
             scomp e1 cenv @ scomp e2 (Intrm :: cenv) @ [SSub] 
       | Prim("*", e1, e2) -> 
-            scomp e1 cenv @ scomp e2 (Intrm :: cenv) @ [SMul] 
+            scomp e1 cenv @ scomp e2 (Intrm :: cenv) @ [SMul]
+      | If(e1, e2, e3) -> 
+            scomp e1 cenv @ [SSwap; SPop] @ scomp e2 cenv @ scomp e3 cenv
       | Prim _ -> raise (Failure "scomp: unknown operator")
 
 let s1 = scomp e1 []
@@ -345,12 +347,12 @@ that parses a string as an expression and compiles it to stack machine code.*)
 let checkIfValid (str : string) : bool =
       match fromString str with
       | expr -> true
-      | _ -> false
+      | _ -> failwith "fail at checkIfValid"
 
 let compString (str : string) : sinstr List =
       match checkIfValid str with
       | true -> scomp (fromString str) []
-      | false -> failwith "fail at compString"
+      | _ -> failwith "fail at compString"
 
 //test for compstring
 //let test = compString "let x = 5 in x + 5 end"

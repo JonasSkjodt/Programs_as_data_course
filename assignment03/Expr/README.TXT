@@ -39,4 +39,11 @@ B. Generating and compiling the lexer and parser for the expression
    let code3 = scomp (fromString "let x = 1+2 in 2 + x * 4 end") [];;
    seval code3 [];;
 
+   let code4 = compString "let x = 1+2 in 2 + x * 4 end";;
+
+   let code5 = compString "if 4 then 2 else 3";;
+   
+   let code6 = compString "let x = 1+2 if 0 then 2 else 3 end";;
+
+
    #q;;

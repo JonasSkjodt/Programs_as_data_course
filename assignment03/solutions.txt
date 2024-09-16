@@ -36,14 +36,18 @@ z                                           Expr ::= NAME                       
 
 
 Exercise 3.4
-See picture 3_4.png or use https://miro.com/app/board/uXjVLfqvZys=/
+See picture ex3_4.png or use https://miro.com/app/board/uXjVLfqvZys=/
+
 
 Exercise 3.5 
-See picture 3_5.png
+See picture ex3_5.png
+
 
 Exercise 3.6
-See picture 3_6.png
+See picture ex3_6.png
+
 
 Exercise 3.7
 You can see the extended functionalty in ExprPar.fsy and ExprLex.fsl.
 we've only added the F#/ML-style: IF THEN ELSE, we didnt add the lightweight C/C++/Java/C#-style versions.
+We tested it as seen on picture ex3_7.png (after adding additional code to scomp in Expr.fs)
