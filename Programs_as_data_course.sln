@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assignment04", "assignment04", "{2DDAFF9E-4700-48B2-8809-ACD4A80016AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sexpr", "assignment04\SExpr\sexpr.csproj", "{4681984F-60B8-4D9E-A91D-DE564FF1116A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4681984F-60B8-4D9E-A91D-DE564FF1116A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4681984F-60B8-4D9E-A91D-DE564FF1116A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4681984F-60B8-4D9E-A91D-DE564FF1116A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4681984F-60B8-4D9E-A91D-DE564FF1116A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4681984F-60B8-4D9E-A91D-DE564FF1116A} = {2DDAFF9E-4700-48B2-8809-ACD4A80016AE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00BD8663-D1D3-4462-A11A-AF330E565ACC}
+	EndGlobalSection
+EndGlobal
