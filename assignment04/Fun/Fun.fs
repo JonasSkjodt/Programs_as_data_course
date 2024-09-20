@@ -25,7 +25,8 @@ let rec lookup env x =
 type value = 
   | Int of int
   //changed Closure from string to string list
-  | Closure of string * (string) list * expr * value env  (* (f, xs, fBody, fDeclEnv) *)
+  //| Closure of string * (string) list * expr * value env
+  | Closure of string * (string) list * expr * (string * value) list  (* (f, xs, fBody, fDeclEnv) *)
 
 let rec eval (e : expr) (env : value env) : int =
     match e with 
@@ -77,7 +78,7 @@ let rec eval (e : expr) (env : value env) : int =
       match fClosure with
       | Closure (f, xs, fBody, fDeclEnv) -> 
         let xVals = List.map (fun eArg -> Int(eval eArg env)) eArgs // xVals now takes all elements of the list and gets int value from the element and adds it to a new list. 
-        let fBodyEnv = List.zip xs xVals @ (f, fClosure) :: env // List.zip takes two lists and combines them into a list of tuples.
+        let fBodyEnv = List.zip xs xVals @ (f, fClosure) :: fDeclEnv // List.zip takes two lists and combines them into a list of tuples.
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "eval Call: not first-order function"

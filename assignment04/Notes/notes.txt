@@ -1,0 +1,31 @@
+4.4
+POW, MAX2 and MAX3 works.
+
+1: In FunPar.fsy
+
+AtExpr:
+  | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
+  | LET NAME ParamList EQ Expr IN Expr END { Letfun($2, $3, $5, $7) }
+;
+
+ParamList:
+    NAME             { [$1] }
+  | ParamList NAME   { $1 @ [$2] }
+
+2:in eval let fbodyEnv was changed back to fDeclEnv from env
+
+| Closure (f, xs, fBody, fDeclEnv) -> 
+        let xVals = List.map (fun eArg -> Int(eval eArg env)) eArgs // xVals now takes all elements of the list and gets int value from the element and adds it to a new list. 
+        let fBodyEnv = List.zip xs xVals @ (f, fClosure) :: fDeclEnv // List.zip takes two lists and combines them into a list of tuples.
+        eval fBody fBodyEnv
+
+
+3: in parse there are tests now
+
+then run it with run ex6;;, dont forget to open these before that
+
+open Absyn;;
+open Fun;;
+open FunLex;;
+open FunPar;;
+open Parse;;

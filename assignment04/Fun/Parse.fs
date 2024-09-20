@@ -71,16 +71,16 @@ let ex5 = fromString
                  end
               end"
 
-(*4.4
-example
-let pow x n = if n=0 then 1 else x * pow x (n-1) in pow 3 8 end
-let max2 a b = if a<b then b else a
-in let max3 a b c = max2 a (max2 b c)
-in max3 25 6 62 end
-end
-Books says Usql/UsqlPar.fsy (its probably FunPar for us)
-*)
+(*ex 4.4*)
 
+// 3^8 = 6561
+let ex6 = fromString
+            @"let pow x n = if n=0 then 1 else x * pow x (n-1) 
+              in pow 3 8 end"
 
-
-
+// max3 25 6 62 = 62
+let ex7 = fromString
+            @"let max2 a b = if a<b then b else a
+              in let max3 a b c = max2 a (max2 b c)
+                 in max3 25 6 62 end
+                 end"

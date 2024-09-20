@@ -18,17 +18,9 @@ We modified eval
 
 
 4.4
-POW, MAX2 and MAX3 works. See img 4_4 for POW to discuss tomorrow
+POW, MAX2 and MAX3 inserted. See image ex4_4.png for fsi results.
 
-In FunPar.fsy
-AtExpr:
-  | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
-  | LET NAME ParamList EQ Expr IN Expr END { Letfun($2, $3, $5, $7) }
-;
-
-ParamList:
-    NAME             { [$1] }
-  | ParamList NAME   { $1 @ [$2] }
+eval was changed back to fDeclEnv (static) from env (dynamic)
 
 
 
