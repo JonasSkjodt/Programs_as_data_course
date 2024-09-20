@@ -24,7 +24,8 @@ let rec lookup env x =
 
 type value = 
   | Int of int
-  | Closure of string * string * expr * value env       (* (f, x, fBody, fDeclEnv) *)
+  //changed Closure from string to string list
+  | Closure of string * (string) list * expr * value env  (* (f, xs, fBody, fDeclEnv) *)
 
 let rec eval (e : expr) (env : value env) : int =
     match e with 
@@ -52,16 +53,31 @@ let rec eval (e : expr) (env : value env) : int =
       let b = eval e1 env
       if b<>0 then eval e2 env
       else eval e3 env
-    | Letfun(f, x, fBody, letBody) -> 
-      let bodyEnv = (f, Closure(f, x, fBody, env)) :: env 
+    //old stuff
+    // | Letfun(f, x, fBody, letBody) ->  
+    //   let bodyEnv = (f, Closure(f, x, fBody, env)) :: env
+    //   eval letBody bodyEnv
+    // | Call(Var f, eArg) -> 
+    //   let fClosure = lookup env f
+    //   match fClosure with
+    //   | Closure (f, x, fBody, fDeclEnv) -> 
+    //     let xVal = Int(eval eArg env) 
+    //     // let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
+    //     let fBodyEnv = (x, xVal) :: (f, fClosure) :: env
+    //     eval fBody fBodyEnv
+    //   | _ -> failwith "eval Call: not a function"
+    // | Call _ -> failwith "eval Call: not first-order function"
+
+    //new stuff
+    | Letfun(f, xs, fBody, letBody) ->  
+      let bodyEnv = (f, Closure(f, xs, fBody, env)) :: env
       eval letBody bodyEnv
-    | Call(Var f, eArg) -> 
+    | Call(Var f, eArgs) -> 
       let fClosure = lookup env f
       match fClosure with
-      | Closure (f, x, fBody, fDeclEnv) ->
-        let xVal = Int(eval eArg env)
-        // let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
-        let fBodyEnv = (x, xVal) :: (f, fClosure) :: env
+      | Closure (f, xs, fBody, fDeclEnv) -> 
+        let xVals = List.map (fun eArg -> Int(eval eArg env)) eArgs // xVals now takes all elements of the list and gets int value from the element and adds it to a new list. 
+        let fBodyEnv = List.zip xs xVals @ (f, fClosure) :: env // List.zip takes two lists and combines them into a list of tuples.
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "eval Call: not first-order function"
@@ -72,124 +88,124 @@ let run e = eval e [];;
 
 (* Examples in abstract syntax *)
 
-let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
-                 Call(Var "f1", CstI 12));;
+// let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
+//                  Call(Var "f1", CstI 12));;
 
-(* Example: factorial *)
+// (* Example: factorial *)
 
-let ex2 = Letfun("fac", "x",
-                 If(Prim("=", Var "x", CstI 0),
-                    CstI 1,
-                    Prim("*", Var "x", 
-                              Call(Var "fac", 
-                                   Prim("-", Var "x", CstI 1)))),
-                 Call(Var "fac", Var "n"));;
+// let ex2 = Letfun("fac", "x",
+//                  If(Prim("=", Var "x", CstI 0),
+//                     CstI 1,
+//                     Prim("*", Var "x", 
+//                               Call(Var "fac", 
+//                                    Prim("-", Var "x", CstI 1)))),
+//                  Call(Var "fac", Var "n"));;
 
-(* let fac10 = eval ex2 [("n", Int 10)];; *)
+// (* let fac10 = eval ex2 [("n", Int 10)];; *)
 
-(* Example: deep recursion to check for constant-space tail recursion *)
+// (* Example: deep recursion to check for constant-space tail recursion *)
 
-let ex3 = Letfun("deep", "x", 
-                 If(Prim("=", Var "x", CstI 0),
-                    CstI 1,
-                    Call(Var "deep", Prim("-", Var "x", CstI 1))),
-                 Call(Var "deep", Var "count"));;
+// let ex3 = Letfun("deep", "x", 
+//                  If(Prim("=", Var "x", CstI 0),
+//                     CstI 1,
+//                     Call(Var "deep", Prim("-", Var "x", CstI 1))),
+//                  Call(Var "deep", Var "count"));;
     
-let rundeep n = eval ex3 [("count", Int n)];;
+// let rundeep n = eval ex3 [("count", Int n)];;
 
-(* Example: static scope (result 14) or dynamic scope (result 25) *)
+// (* Example: static scope (result 14) or dynamic scope (result 25) *)
 
-let ex4 =
-    Let("y", CstI 11,
-        Letfun("f", "x", Prim("+", Var "x", Var "y"),
-               Let("y", CstI 22, Call(Var "f", CstI 3))));;
+// let ex4 =
+//     Let("y", CstI 11,
+//         Letfun("f", "x", Prim("+", Var "x", Var "y"),
+//                Let("y", CstI 22, Call(Var "f", CstI 3))));;
 
-(* Example: two function definitions: a comparison and Fibonacci *)
+// (* Example: two function definitions: a comparison and Fibonacci *)
 
-let ex5 = 
-    Letfun("ge2", "x", Prim("<", CstI 1, Var "x"),
-           Letfun("fib", "n",
-                  If(Call(Var "ge2", Var "n"),
-                     Prim("+",
-                          Call(Var "fib", Prim("-", Var "n", CstI 1)),
-                          Call(Var "fib", Prim("-", Var "n", CstI 2))),
-                     CstI 1), Call(Var "fib", CstI 25)));;
+// let ex5 = 
+//     Letfun("ge2", "x", Prim("<", CstI 1, Var "x"),
+//            Letfun("fib", "n",
+//                   If(Call(Var "ge2", Var "n"),
+//                      Prim("+",
+//                           Call(Var "fib", Prim("-", Var "n", CstI 1)),
+//                           Call(Var "fib", Prim("-", Var "n", CstI 2))),
+//                      CstI 1), Call(Var "fib", CstI 25)));;
                      
-(*4.2*)
-let rec sum n =
-    match n with
-    | 1 -> 1
-    | _ -> n + sum (n-1);;
+// (*4.2*)
+// let rec sum n =
+//     match n with
+//     | 1 -> 1
+//     | _ -> n + sum (n-1);;
  
-// SUM
-let ex6 = Letfun("sum", "n", 
-                  If(Prim("=", Var "n", CstI 1),
-                    CstI 1,
-                    Prim("+", Var "n", 
-                        Call(Var "sum",
-                        Prim("-", Var "n", CstI 1)))), 
-                    Call(Var "sum", Var "n"))
+// // SUM
+// let ex6 = Letfun("sum", "n", 
+//                   If(Prim("=", Var "n", CstI 1),
+//                     CstI 1,
+//                     Prim("+", Var "n", 
+//                         Call(Var "sum",
+//                         Prim("-", Var "n", CstI 1)))), 
+//                     Call(Var "sum", Var "n"))
 
-let t6 = eval ex6 [("n", Int 1000)];;
+// let t6 = eval ex6 [("n", Int 1000)];;
 
-// POWER OF
-let rec pow n m =
-    match m with
-    | 0 -> 1
-    | _ -> n * pow n (m-1);;
+// // POWER OF
+// let rec pow n m =
+//     match m with
+//     | 0 -> 1
+//     | _ -> n * pow n (m-1);;
 
-let ex7 = Let("n", CstI 3, 
-            Letfun("pow", "m", 
-                    If(Prim("=", Var "m", CstI 1),
-                      Var "n",
-                      Prim("*", Var "n", 
-                          Call(Var "pow",
-                          Prim("-", Var "m", CstI 1)))), 
-                      Call(Var "pow", Var "m")))
+// let ex7 = Let("n", CstI 3, 
+//             Letfun("pow", "m", 
+//                     If(Prim("=", Var "m", CstI 1),
+//                       Var "n",
+//                       Prim("*", Var "n", 
+//                           Call(Var "pow",
+//                           Prim("-", Var "m", CstI 1)))), 
+//                       Call(Var "pow", Var "m")))
 
-let t7 = eval ex7 [("m", Int 8)];;
+// let t7 = eval ex7 [("m", Int 8)];;
 
-// SUM OF POWERS
-let rec sumPower n m =
-    match m with
-    | 0 -> pow n m
-    | _ -> pow n m + sumPower n (m-1);;
+// // SUM OF POWERS
+// let rec sumPower n m =
+//     match m with
+//     | 0 -> pow n m
+//     | _ -> pow n m + sumPower n (m-1);;
 
-let ex8 = 
-    Let("n", CstI 3, 
-        Letfun("pow", "m", 
-            If(Prim("=", Var "m", CstI 0),
-                CstI 1,
-                Prim("*", Var "n", 
-                    Call(Var "pow", Prim("-", Var "m", CstI 1)))),
-            Letfun("sumPower", "m",
-                If(Prim("=", Var "m", CstI 0),
-                    Call(Var "pow", Var "m"),
-                    Prim("+", 
-                        Call(Var "pow", Var "m"),
-                        Call(Var "sumPower", Prim("-", Var "m", CstI 1)))),
-                Call(Var "sumPower", Var "m"))))
+// let ex8 = 
+//     Let("n", CstI 3, 
+//         Letfun("pow", "m", 
+//             If(Prim("=", Var "m", CstI 0),
+//                 CstI 1,
+//                 Prim("*", Var "n", 
+//                     Call(Var "pow", Prim("-", Var "m", CstI 1)))),
+//             Letfun("sumPower", "m",
+//                 If(Prim("=", Var "m", CstI 0),
+//                     Call(Var "pow", Var "m"),
+//                     Prim("+", 
+//                         Call(Var "pow", Var "m"),
+//                         Call(Var "sumPower", Prim("-", Var "m", CstI 1)))),
+//                 Call(Var "sumPower", Var "m"))))
 
-// equates to 265720
-let t8 = eval ex8 [("m", Int 11)];;
+// // equates to 265720
+// let t8 = eval ex8 [("m", Int 11)];;
 
-let ex9 = 
-    Let("m", CstI 8, 
-        Letfun("pow", "i", 
-            If(Prim("=", Var "i", CstI 0),
-                CstI 1,
-                Prim("*", Var "n", 
-                    Call(Var "pow", Prim("-", Var "i", CstI 1)))),
-            Letfun("sum", "n",
-                If(Prim("=", Var "n", CstI 10),
-                    Call(Var "pow", Var "m"), // was n before
-                    Prim("+", 
-                        Call(Var "pow", Var "m"), // was n before
-                        Call(Var "sum", Prim("+", Var "n", CstI 1)))),
-                Call(Var "sum", Var "n"))))
+// let ex9 = 
+//     Let("m", CstI 8, 
+//         Letfun("pow", "i", 
+//             If(Prim("=", Var "i", CstI 0),
+//                 CstI 1,
+//                 Prim("*", Var "n", 
+//                     Call(Var "pow", Prim("-", Var "i", CstI 1)))),
+//             Letfun("sum", "n",
+//                 If(Prim("=", Var "n", CstI 10),
+//                     Call(Var "pow", Var "m"), // was n before
+//                     Prim("+", 
+//                         Call(Var "pow", Var "m"), // was n before
+//                         Call(Var "sum", Prim("+", Var "n", CstI 1)))),
+//                 Call(Var "sum", Var "n"))))
 
-// Evaluate ex9 with the environment [("n", Int 1)]
-let t9 = eval ex9 [("n", Int 1)];;
+// // Evaluate ex9 with the environment [("n", Int 1)]
+// let t9 = eval ex9 [("n", Int 1)];;
 
 
 
