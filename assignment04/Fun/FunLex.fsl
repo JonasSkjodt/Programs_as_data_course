@@ -30,6 +30,10 @@ let keyword s =
     | "not"   -> NOT
     | "then"  -> THEN
     | "true"  -> CSTBOOL true
+    (*4.4: we filled in pow, max2, and max3*)
+    (* | "pow"   -> POW
+    | "max2"  -> MAX2
+    | "max3"  -> MAX3*)
     | _       -> NAME s
 }
 

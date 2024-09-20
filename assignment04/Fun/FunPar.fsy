@@ -57,8 +57,15 @@ AtExpr:
   | NAME                                { Var $1                 }
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
   | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
+  | LET NAME NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $4, $6, $8) }
   | LPAR Expr RPAR                      { $2                     }
 ;
+
+(* let pow x n = if n=0 then 1 else x * pow x (n-1) in pow 3 8 end
+
+Call(Call(Var "f", Var "a")
+Call(Var "f", [Var "a"; Var "b"])
+*)
 
 AppExpr:
     AtExpr AtExpr                       { Call($1, $2)           }
