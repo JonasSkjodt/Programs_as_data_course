@@ -7,10 +7,10 @@
 
   <ItemGroup>
     <Compile Include="Absyn.fs" />
-    <Compile Include="FunPar.fs" />
     <Compile Include="Fun.fs" />
-    <Compile Include="Parse.fs" />
     <Compile Include="FunLex.fs" />
+    <Compile Include="FunPar.fs" />
+    <Compile Include="Parse.fs" />
   </ItemGroup>
 
   <ItemGroup>

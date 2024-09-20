@@ -13,9 +13,23 @@ See image ex4.2.png for the results.
 
 
 4.3
+We modified eval
+
 
 
 4.4
+POW, MAX2 and MAX3 works. See img 4_4 for POW to discuss tomorrow
+
+In FunPar.fsy
+AtExpr:
+  | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
+  | LET NAME ParamList EQ Expr IN Expr END { Letfun($2, $3, $5, $7) }
+;
+
+ParamList:
+    NAME             { [$1] }
+  | ParamList NAME   { $1 @ [$2] }
+
 
 
 4.5

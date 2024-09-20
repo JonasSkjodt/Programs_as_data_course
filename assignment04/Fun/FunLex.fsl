@@ -31,9 +31,9 @@ let keyword s =
     | "then"  -> THEN
     | "true"  -> CSTBOOL true
     (*4.4: we filled in pow, max2, and max3*)
-    (* | "pow"   -> POW
-    | "max2"  -> MAX2
-    | "max3"  -> MAX3*)
+    | "pow"   -> NAME s
+    | "max2"  -> NAME s
+    | "max3"  -> NAME s
     | _       -> NAME s
 }
 
