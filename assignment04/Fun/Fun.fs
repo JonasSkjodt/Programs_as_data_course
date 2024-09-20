@@ -60,7 +60,8 @@ let rec eval (e : expr) (env : value env) : int =
       match fClosure with
       | Closure (f, x, fBody, fDeclEnv) ->
         let xVal = Int(eval eArg env)
-        let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
+        // let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
+        let fBodyEnv = (x, xVal) :: (f, fClosure) :: env
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "eval Call: not first-order function"
@@ -129,7 +130,7 @@ let ex6 = Letfun("sum", "n",
                         Prim("-", Var "n", CstI 1)))), 
                     Call(Var "sum", Var "n"))
 
-let ex6test1 = eval ex6 [("n", Int 1000)];;
+let t6 = eval ex6 [("n", Int 1000)];;
 
 // POWER OF
 let rec pow n m =
@@ -146,30 +147,13 @@ let ex7 = Let("n", CstI 3,
                           Prim("-", Var "m", CstI 1)))), 
                       Call(Var "pow", Var "m")))
 
-let ex7test1 = eval ex7 [("m", Int 8)];;
+let t7 = eval ex7 [("m", Int 8)];;
 
 // SUM OF POWERS
 let rec sumPower n m =
     match m with
     | 0 -> pow n m
     | _ -> pow n m + sumPower n (m-1);;
-    
-// let ex8 = Let("n", CstI 3, 
-//             Letfun("pluspow", "m", 
-//                     If(Prim("=", Var "m", CstI 11),
-//                       Var "n",
-//                       Prim("+", ex7 [("m", Int (eval Var "m"))],
-//                           Call(Var "pluspow",
-//                             Prim("+", Var "m", CstI 1)))),
-                      
-//                       // Prim("*", Var "n", 
-//                       //     Call(Var "powto",
-//                       //     Prim("+", Var "m", CstI 1)))),
-                           
-//                       Call(Var "pluspow", Var "m")))
-//             //letfun("powto", "m",)
-
-// let ex8test1 = eval ex8 [("m", Int 0)];;
 
 let ex8 = 
     Let("n", CstI 3, 
@@ -186,9 +170,27 @@ let ex8 =
                         Call(Var "sumPower", Prim("-", Var "m", CstI 1)))),
                 Call(Var "sumPower", Var "m"))))
 
-// Evaluate ex8 with the environment [("m", Int 11)]
 // equates to 265720
-let ex8test1 = eval ex8 [("m", Int 11)];;
+let t8 = eval ex8 [("m", Int 11)];;
+
+let ex9 = 
+    Let("m", CstI 8, 
+        Letfun("pow", "i", 
+            If(Prim("=", Var "i", CstI 0),
+                CstI 1,
+                Prim("*", Var "n", 
+                    Call(Var "pow", Prim("-", Var "i", CstI 1)))),
+            Letfun("sum", "n",
+                If(Prim("=", Var "n", CstI 10),
+                    Call(Var "pow", Var "m"), // was n before
+                    Prim("+", 
+                        Call(Var "pow", Var "m"), // was n before
+                        Call(Var "sum", Prim("+", Var "n", CstI 1)))),
+                Call(Var "sum", Var "n"))))
+
+// Evaluate ex9 with the environment [("n", Int 1)]
+let t9 = eval ex9 [("n", Int 1)];;
+
 
 
 (*

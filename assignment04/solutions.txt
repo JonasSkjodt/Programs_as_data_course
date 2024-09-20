@@ -2,6 +2,14 @@
 Going through the readme.txt shows everything is working fine.
 
 4.2
+in the first 3 exercises we created the functions to make it work.
+In the 4th eval was changed from:
+    let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv (static)
+    to 
+    let fBodyEnv = (x, xVal) :: (f, fClosure) :: env (dynamic)
+This ensured that the var "i" always was using the last sat value in "i".
+
+See image ex4.2.png for the results.
 
 
 4.3

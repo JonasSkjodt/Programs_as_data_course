@@ -43,6 +43,11 @@ dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net
 //assigmnet04
 fsyacc --module FunPar FunPar.fsy
 fslex --unicode FunLex.fsl
-dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs
-
 dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs Fun.fs ParseAndRun.fs
+
+dotnet fsi Absyn.fs Fun.fs
+
+   open Absyn;;
+   open Fun;;
+   let res = run (Prim("+", CstI 5, CstI 7));;
+   #q;;
