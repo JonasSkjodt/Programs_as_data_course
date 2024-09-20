@@ -114,3 +114,92 @@ let ex5 =
                           Call(Var "fib", Prim("-", Var "n", CstI 2))),
                      CstI 1), Call(Var "fib", CstI 25)));;
                      
+(*4.2*)
+let rec sum n =
+    match n with
+    | 1 -> 1
+    | _ -> n + sum (n-1);;
+ 
+// SUM
+let ex6 = Letfun("sum", "n", 
+                  If(Prim("=", Var "n", CstI 1),
+                    CstI 1,
+                    Prim("+", Var "n", 
+                        Call(Var "sum",
+                        Prim("-", Var "n", CstI 1)))), 
+                    Call(Var "sum", Var "n"))
+
+let ex6test1 = eval ex6 [("n", Int 1000)];;
+
+// POWER OF
+let rec pow n m =
+    match m with
+    | 0 -> 1
+    | _ -> n * pow n (m-1);;
+
+let ex7 = Let("n", CstI 3, 
+            Letfun("pow", "m", 
+                    If(Prim("=", Var "m", CstI 1),
+                      Var "n",
+                      Prim("*", Var "n", 
+                          Call(Var "pow",
+                          Prim("-", Var "m", CstI 1)))), 
+                      Call(Var "pow", Var "m")))
+
+let ex7test1 = eval ex7 [("m", Int 8)];;
+
+// SUM OF POWERS
+let rec sumPower n m =
+    match m with
+    | 0 -> pow n m
+    | _ -> pow n m + sumPower n (m-1);;
+    
+let ex8 = Let("n", CstI 3, 
+            Letfun("pluspow", "m", 
+                    If(Prim("=", Var "m", CstI 11),
+                      Var "n",
+                      Prim("+", ex7 [("m", Int 0)]
+                          Call(Var "powto",
+                          Prim("+", Var "m", CstI 1)))),
+                      
+                      Prim("*", Var "n", 
+                          Call(Var "powto",
+                          Prim("+", Var "m", CstI 1)))),
+                           
+                      Call(Var "pluspow", Var "m")))
+            //letfun("powto", "m",)
+
+let ex8test1 = eval ex8 [("m", Int 0)];;
+(*
+
+let rec power n m =
+    match m with
+    | 0 -> 1
+    | _ -> n * power n (m-1);;
+
+let rec sumPower n m =
+    match m with
+    | 0 -> power n m
+    | _ -> power n m + sumPower n (m-1);;
+
+let rec sumPower2 n m =
+    match m with
+    | 0 -> 1
+    | _ -> power n m + sumPower2 n (m-1);;*)
+
+
+// let e1 = fromString "5+7";;
+// let e2 = fromString "let y = 7 in y + 2 end";;
+// let e3 = fromString "let f x = x + 7 in f 2 end";;
+
+// run (fromString "5+7");;
+// run (fromString "let y = 7 in y + 2 end");;
+// run (fromString "let f x = x + 7 in f 2 end");;
+
+
+
+
+
+
+
+
