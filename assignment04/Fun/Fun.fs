@@ -154,22 +154,43 @@ let rec sumPower n m =
     | 0 -> pow n m
     | _ -> pow n m + sumPower n (m-1);;
     
-let ex8 = Let("n", CstI 3, 
-            Letfun("pluspow", "m", 
-                    If(Prim("=", Var "m", CstI 11),
-                      Var "n",
-                      Prim("+", ex7 [("m", Int 0)]
-                          Call(Var "powto",
-                          Prim("+", Var "m", CstI 1)))),
+// let ex8 = Let("n", CstI 3, 
+//             Letfun("pluspow", "m", 
+//                     If(Prim("=", Var "m", CstI 11),
+//                       Var "n",
+//                       Prim("+", ex7 [("m", Int (eval Var "m"))],
+//                           Call(Var "pluspow",
+//                             Prim("+", Var "m", CstI 1)))),
                       
-                      Prim("*", Var "n", 
-                          Call(Var "powto",
-                          Prim("+", Var "m", CstI 1)))),
+//                       // Prim("*", Var "n", 
+//                       //     Call(Var "powto",
+//                       //     Prim("+", Var "m", CstI 1)))),
                            
-                      Call(Var "pluspow", Var "m")))
-            //letfun("powto", "m",)
+//                       Call(Var "pluspow", Var "m")))
+//             //letfun("powto", "m",)
 
-let ex8test1 = eval ex8 [("m", Int 0)];;
+// let ex8test1 = eval ex8 [("m", Int 0)];;
+
+let ex8 = 
+    Let("n", CstI 3, 
+        Letfun("pow", "m", 
+            If(Prim("=", Var "m", CstI 0),
+                CstI 1,
+                Prim("*", Var "n", 
+                    Call(Var "pow", Prim("-", Var "m", CstI 1)))),
+            Letfun("sumPower", "m",
+                If(Prim("=", Var "m", CstI 0),
+                    Call(Var "pow", Var "m"),
+                    Prim("+", 
+                        Call(Var "pow", Var "m"),
+                        Call(Var "sumPower", Prim("-", Var "m", CstI 1)))),
+                Call(Var "sumPower", Var "m"))))
+
+// Evaluate ex8 with the environment [("m", Int 11)]
+// equates to 265720
+let ex8test1 = eval ex8 [("m", Int 11)];;
+
+
 (*
 
 let rec power n m =
