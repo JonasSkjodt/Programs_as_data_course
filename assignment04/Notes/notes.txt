@@ -8,9 +8,24 @@ AtExpr:
   | LET NAME ParamList EQ Expr IN Expr END { Letfun($2, $3, $5, $7) }
 ;
 
+Got from this: https://www.partario.com/blog/2009/05/lisp-compiler-in-f-parsing-with-fslex-and-fsyacc.html
 ParamList:
     NAME             { [$1] }
   | ParamList NAME   { $1 @ [$2] }
+
+Note: It is important that even in the fsy file, fsharp can be written and executed. Like so:
+
+AppExpr:
+    AtExpr                              { $1 }
+    | AppExpr AtExpr                    { match $1 with
+                                          | Call(f, args) -> Call(f, args @ [$2])
+                                          | _ -> Call($1, [$2]) }
+
+Eksample for the above:
+f is parsed as an AtExpr.
+f x is parsed as Call(f, [x]).
+f x y is parsed as Call(f, [x, y]).
+
 
 2:in eval let fbodyEnv was changed back to fDeclEnv from env
 

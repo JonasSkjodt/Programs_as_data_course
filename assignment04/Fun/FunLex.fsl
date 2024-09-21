@@ -30,10 +30,8 @@ let keyword s =
     | "not"   -> NOT
     | "then"  -> THEN
     | "true"  -> CSTBOOL true
-    (*4.4: we filled in pow, max2, and max3*)
-    | "pow"   -> NAME s
-    | "max2"  -> NAME s
-    | "max3"  -> NAME s
+    | "and"   -> AND
+    | "or"    -> OR
     | _       -> NAME s
 }
 
@@ -59,6 +57,8 @@ rule Token = parse
   | '%'             { MOD }
   | '('             { LPAR }
   | ')'             { RPAR }
+  | "&&"            { AND }
+  | "||"            { OR }
   | eof             { EOF }
   | _               { failwith "Lexer error: illegal symbol" }
 

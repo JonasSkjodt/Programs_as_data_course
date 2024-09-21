@@ -82,5 +82,24 @@ let ex6 = fromString
 let ex7 = fromString
             @"let max2 a b = if a<b then b else a
               in let max3 a b c = max2 a (max2 b c)
-                 in max3 25 6 62 end
+                 in max3 25 6 62 end 
                  end"
+
+(*ex 4.5*)
+// AND tests
+let ex8 = fromString
+            @"let andTest = if false && true then 1 else 0
+              in andTest end"
+
+let ex9 = fromString
+            @"let andtest2 = if true && true then 1 else 0
+              in andtest2 end" 
+
+// OR tests
+let ex10 = fromString
+            @"let orTest3 = if false or true then 1 else 0
+              in orTest3 end"
+
+let ex11 = fromString
+            @"let ortest4 = if false || false then 1 else 0 
+              in ortest4 end" 
