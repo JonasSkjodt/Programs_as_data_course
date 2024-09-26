@@ -57,3 +57,6 @@ let rec merge (xs, ys) =
       | (xs, []) -> xs // if ys is empty, return xs
       | (x::xr, y::yr) -> if x < y then x :: merge (xr, ys) // if x < y, take list x and merge it with the rest of xs and ys
                           else y :: merge (xs, yr) // if y < x, take list y and merge it with the rest of xs and ys
+
+//merge ([3;5;12], [2;3;4;7]) should give [2;3;3;4;5;7;12].
+let mergeTest = merge ([3;5;12], [2;3;4;7])

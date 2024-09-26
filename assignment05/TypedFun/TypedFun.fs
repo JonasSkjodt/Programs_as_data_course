@@ -37,7 +37,7 @@ type typ =
   | TypI                                (* int                         *)
   | TypB                                (* bool                        *)
   | TypF of typ * typ                   (* (argumenttype, resulttype)  *)
-  | TypL of typ list
+  | TypL of typ list                   (* ex5.7                       *)
 
 (* New abstract syntax with explicit types, instead of Absyn.expr: *)
 
@@ -51,7 +51,7 @@ type tyexpr =
   | Letfun of string * string * typ * tyexpr * typ * tyexpr
           (* (f,       x,       xTyp, fBody,  rTyp, letBody *)
   | Call of tyexpr * tyexpr
-  | ListExpr of tyexpr list * typ
+  | ListExpr of tyexpr list * typ 
 
 (* A runtime value is an integer or a function closure *)
 
@@ -98,15 +98,14 @@ let rec eval (e : tyexpr) (env : value env) : int =
     | Call _ -> failwith "illegal function in Call"
 
 (* Type checking for the first-order functional language: *)
-
 let rec typ (e : tyexpr) (env : typ env) : typ =
     match e with
     | CstI i -> TypI
     | CstB b -> TypB
-    | Var x  -> lookup env x 
-    | Prim(ope, e1, e2) -> 
-      let t1 = typ e1 env
-      let t2 = typ e2 env
+    | Var x  -> lookup env x                        
+    | Prim(ope, e1, e2) ->                          
+      let t1 = typ e1 env                           
+      let t2 = typ e2 env                           
       match (ope, t1, t2) with
       | ("*", TypI, TypI) -> TypI
       | ("+", TypI, TypI) -> TypI
@@ -116,7 +115,7 @@ let rec typ (e : tyexpr) (env : typ env) : typ =
       | ("&", TypB, TypB) -> TypB
       | _   -> failwith "unknown op, or type error"
     | Let(x, eRhs, letBody) -> 
-      let xTyp = typ eRhs env
+      let xTyp = typ eRhs env 
       let letBodyEnv = (x, xTyp) :: env 
       typ letBody letBodyEnv
     | If(e1, e2, e3) -> 
@@ -126,23 +125,24 @@ let rec typ (e : tyexpr) (env : typ env) : typ =
                 if t2 = t3 then t2
                 else failwith "If: branch types differ"
       | _    -> failwith "If: condition not boolean"
-    | Letfun(f, x, xTyp, fBody, rTyp, letBody) -> 
-      let fTyp = TypF(xTyp, rTyp) 
-      let fBodyEnv = (x, xTyp) :: (f, fTyp) :: env
-      let letBodyEnv = (f, fTyp) :: env
-      if typ fBody fBodyEnv = rTyp
-      then typ letBody letBodyEnv
+      
+    | Letfun(f, x, xTyp, fBody, rTyp, letBody) ->   
+      let fTyp = TypF(xTyp, rTyp)                   
+      let fBodyEnv = (x, xTyp) :: (f, fTyp) :: env  
+      let letBodyEnv = (f, fTyp) :: env             
+      if typ fBody fBodyEnv = rTyp                  
+      then typ letBody letBodyEnv                   
       else failwith ("Letfun: return type in " + f)
-    | Call(Var f, eArg) -> 
-      match lookup env f with
-      | TypF(xTyp, rTyp) ->
-        if typ eArg env = xTyp then rTyp
+      
+    | Call(Var f, eArg) ->                          
+      match lookup env f with                       
+      | TypF(xTyp, rTyp) ->                         
+        if typ eArg env = xTyp then rTyp            
         else failwith "Call: wrong argument type"
       | _ -> failwith "Call: unknown function"
     | Call(_, eArg) -> failwith "Call: illegal function in call"
 
 let typeCheck e = typ e [];;
-
 
 (* Examples of successful type checking *)
 
@@ -188,3 +188,6 @@ let exErr3 = Letfun("f", "x", TypB, Call(Var "f", CstI 22), TypI,
 
 let exErr4 = Letfun("f", "x", TypB, If(Var "x", CstI 11, CstI 22), TypB,
                     Call(Var "f", CstB true));;
+
+//typeL
+let ex7 = ListExpr([CstI 1; CstI 2; CstI 3], TypL [TypI]);;

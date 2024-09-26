@@ -59,3 +59,42 @@ let ex9 =
        in let mul3 x = 3 * x 
        in let twototen = (rep 10) mul3 
        in twototen 7 end end end";;
+
+(*6.1*)
+// val it: HigherFun.value = Int 7
+let ex10 = 
+    Parse.fromString 
+     @"let add x = let f y = x+y in f end 
+       in add 2 5 end";;
+
+// ex11 should be 7 since addtwo is a higher order function
+// val it: HigherFun.value = Int 7
+let ex11 =
+    Parse.fromString
+     @"let add x = let f y = x+y in f end
+       in let addtwo = add 2
+         in addtwo 5 end
+       end";;
+
+// yes it is expected, although let x = 77 introduces x with the value of 77
+// it does not affect the function addtwo due to not being in the same enclosure as the higher order function
+// so the result is 7 from addtwo 5
+let ex12 = 
+    Parse.fromString 
+     @"let add x = let f y = x+y in f end 
+       in let addtwo = add 2
+        in let x = 77 in addtwo 5 end
+        end
+       end";;
+
+// in this one function f doesnt have any value to add to x and therefore
+// the function will be shown instead of a value
+let ex13 = 
+    Parse.fromString 
+     @"let add x = let f y = x+y in f end 
+       in add 2 end";;
+
+//fun x -> 2*x
+let ex14 = 
+    Parse.fromString 
+     @"let f = fun x -> 2*x in f 3 end";;
