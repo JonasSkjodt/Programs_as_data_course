@@ -115,6 +115,24 @@ class LinkedList<T> {
     }
     return res;
   }
+
+  /* 5.1
+ * 
+Implement a similar Java (or C#) method
+static int[] merge(int[] xs, int[] ys) that takes two sorted arrays of ints and merges them into a sorted array of ints.
+The method should build a new array, and should not modify the given arrays.
+Two arrays xs and ys of integers may be built like this:
+int[] xs = { 3, 5, 12 };
+int[] ys = { 2, 3, 4, 7 };
+ */
+  static int[] merge(int[] xs, int[] ys) {
+    int[] res = new int[xs.length + ys.length];
+    int i = 0, j = 0, k = 0;
+    
+    // some while looops
+
+    return res;
+  }
 }
 
 // Corresponds to an F# or ML function type 'A -> 'R
@@ -122,3 +140,4 @@ class LinkedList<T> {
 interface Fun<A,R> {
   R invoke(A x);
 }
+
