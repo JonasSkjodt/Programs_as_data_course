@@ -27,11 +27,31 @@ class TestLinkedList {
     // 5.1
     int[] xs = { 3, 5, 12 };
     int[] ys = { 2, 3, 4, 7 };
-    int[] res = LinkedList.merge(xs, ys);
+    int[] res = merge(xs, ys);
     for (int i = 0; i < res.length; i++) {
       System.out.print(res[i] + " ");
     }
 
+  }
+
+  //5.1 java version of merge
+  public static int[] merge(int[] xs, int[] ys) {
+    
+    int[] res = new int[xs.length + ys.length];
+    int i = 0, j = 0, k = 0;
+    
+    while (i < xs.length && j < ys.length) { // only if nonempty
+      if (xs[i] < ys[j]) { // if xs is smaller, copy from xs to res
+        res[k] = xs[i]; 
+        i++;
+      } else { 
+        res[k] = ys[j]; // if equal, copy from ys to res
+        j++;
+      }
+      k++;
+    }
+    
+    return res;
   }
 
   // Corresponds to SML function of type 'T -> 'T list
@@ -124,26 +144,6 @@ class LinkedList<T> {
       res.add(f.invoke(node.item));
       node = node.next;
     }
-    return res;
-  }
-
-  //5.1 java version of merge
-  public static int[] merge(int[] xs, int[] ys) {
-    
-    int[] res = new int[xs.length + ys.length];
-    int i = 0, j = 0, k = 0;
-
-    while (i < xs.length && j < ys.length) { // Both arrays nonempty
-      if (xs[i] < ys[j]) { // if xs is smaller, copy from xs to res
-        res[k] = xs[i]; 
-        i++;
-      } else { 
-        res[k] = ys[j]; // if equal, copy from ys to res
-        j++;
-      }
-      k++;
-    }
-
     return res;
   }
 }
