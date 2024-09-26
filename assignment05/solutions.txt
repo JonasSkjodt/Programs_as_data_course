@@ -21,7 +21,8 @@ and
 
     | FUN NAME ARROW Expr                 { Fun($2, $4)            }
 
-Now we are trying to do Eval in HigherFun.fs to be able to read something like fun x -> 2*x
+we then changed eval to accept Fun(x, body) and tested it with test2 and test3 in HigherFun.fs.
+See image ex6.2.png for results
 
 6.3
 
