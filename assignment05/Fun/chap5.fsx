@@ -55,5 +55,5 @@ let rec merge (xs, ys) =
     match (xs, ys) with
       | ([], ys) -> ys // if xs is empty, return ys
       | (xs, []) -> xs // if ys is empty, return xs
-      | (x::xr, y::yr) -> if x < y then x :: merge (xr, ys) // if x > y, return y and merge the rest of xs and ys
-                          else y :: merge (xs, yr) // if x < y, return x and merge the rest of xs and ys
+      | (x::xr, y::yr) -> if x < y then x :: merge (xr, ys) // if x < y, take list x and merge it with the rest of xs and ys
+                          else y :: merge (xs, yr) // if y < x, take list y and merge it with the rest of xs and ys
