@@ -1,0 +1,33 @@
+5.1 
+The F# merge function was created in the chap5.fsx file (see image ex5.1.png for results)
+The java merge method was created in LinkedList.java and its results printed from main
+
+5.7
+We changed TypL to accept a list in TypedFun/TypedFun.fs
+and then wondered what to do
+
+6.1
+we added our solutions as comments above the tests in ParseAndRunHigher.fs from line 63 to 95. (revise this later)
+
+6.2
+We added Fun of string * expr to Absyn
+Then we added  | "->"            { ARROW } to FunLex.fsl
+
+To FunPar.fsy we added
+
+    %token FUN ARROW
+
+and 
+
+    | FUN NAME ARROW Expr                 { Fun($2, $4)            }
+
+Now we are trying to do Eval in HigherFun.fs to be able to read something like fun x -> 2*x
+
+6.3
+
+6.4
+
+6.5
+
+
+

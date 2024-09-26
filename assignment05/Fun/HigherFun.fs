@@ -61,11 +61,15 @@ let rec eval (e : expr) (env : value env) : value =
       eval letBody bodyEnv
 
 
-    // | Fun(x, body) -> 
-    //   let fClos = eval body env
-    //   match fClos with
-    //   | Closure(f, x, fBody, fDeclEnv) -> Clos(x, fBody, fDeclEnv)
-      
+    | Fun(x, body) -> 
+      let fClos = eval x env
+      match fClos with
+      | Clos(x, body, env) -> 
+        
+      | _ -> failwith "Fun eval error"
+      // | Closure(f, x, fBody, fDeclEnv) -> Clos(x, fBody, fDeclEnv)
+
+    //| fun(x, body) -> Clos(x, body, env)  
     
     | Call(eFun, eArg) -> 
       let fClosure = eval eFun env  (* Different from Fun.fs - to enable first class functions *)
@@ -80,7 +84,7 @@ let rec eval (e : expr) (env : value env) : value =
 
 let run e = eval e [];;
 
-let test1 = Prim("+", CstI 2, CstI 1)
+let test1 = run (Prim("+", CstI 2, CstI 1))
 //Clos("z", Prim("+", Var "z", Var "y"), [(y,22)])
 (* Examples in abstract syntax *)
 

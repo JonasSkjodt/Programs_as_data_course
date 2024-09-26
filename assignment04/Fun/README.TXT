@@ -14,9 +14,11 @@ B. Generating and compiling the lexer and parser, and loading them:
 
    fsyacc --module FunPar FunPar.fsy
    fslex --unicode FunLex.fsl
-   dotnet fsi -r ~/fsharp/FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs   
+   dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Util.fs Absyn.fs FunPar.fs FunLex.fs Parse.fs
+   
 
    open Parse;;
+   let test = fromString "fun x -> 2*x"
    let e1 = fromString "5+7";;
    let e2 = fromString "let y = 7 in y + 2 end";;
    let e3 = fromString "let f x = x + 7 in f 2 end";;
