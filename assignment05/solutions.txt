@@ -63,23 +63,41 @@ int -> (int -> int), and that the choice of type
 variables does not matter, so the type scheme ’h -> ’g -> ’h is the same
 as a’ -> ’b -> ’a.
 
+example:
+> let mul2 y = 2 * y;;
+val mul2: y: int -> int
+
+
 • bool -> bool
-inferType (fromString "let f x = true in x end");;
+inferType (fromString "let f y = true = y in f end");;
+val it: string = "(bool -> bool)"
 
 • int -> int
-inferType (fromString "let f x = 2 in x end");;
+inferType (fromString "let f y = 2 * y in f end");;
+val it: string = "(int -> int)"
 
 • int -> int -> int
-inferType (fromString "let f x = let g y = 2 in g end 4 in x+y end");;
+inferType (fromString "let f y = let g x =  x * y in g end in f end");;
+val it: string = "(int -> (int -> int))"
 
 • ’a -> ’b -> ’a
-inferType (fromString "let f x y = x in f ");;
+inferType (fromString "let f y = let g x =  if true then y else y in g end in f end");;
+val it: string = "('h -> ('g -> 'h))"
 
 • ’a -> ’b -> ’b
+inferType (fromString "let f y = let g x =  if true then x else x in g end in f end");;
+val it: string = "('g -> ('h -> 'h))"
 
 • (’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
+inferType (fromString "let f y = let g x =  if true then x else x in g end in f end");;
+
 
 • ’a -> ’b
 
 • ’a
 
+
+
+old examples
+inferType (fromString "let f y = let g x =  x * y in g end in f end");;
+val it: string = "(int -> (int -> int))"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj": {}
+    "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj": {}
   },
   "projects": {
-    "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj": {
+    "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
+        "projectUniqueName": "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
         "projectName": "sexpr",
-        "projectPath": "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
+        "projectPath": "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
         "packagesPath": "C:\\Users\\jonas\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\obj\\",
+        "outputPath": "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jonas\\AppData\\Roaming\\NuGet\\NuGet.Config",

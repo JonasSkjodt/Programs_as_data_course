@@ -10,7 +10,7 @@ open Util
 open Absyn
 
 (* Debugging *)
-let debugP = false
+let debugP = true
 let debug s = if debugP then printfn "DEBUG: %s" s else ()
 
 (* Environment operations *)
