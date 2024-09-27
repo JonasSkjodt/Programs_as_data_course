@@ -12,7 +12,7 @@ let inferType = TypeInference.inferType;;
 (* TODO
 let tex1 = 
     inferType(fromString "let f x = 1 in f 7 + f false end");;
-
+  inferType(fromString "let f x = not x in f true && f false end");;
 (* In the let-body, g is polymorphic because f is *)
 
 let tex2 = 
@@ -132,3 +132,35 @@ let id x = x in
   end
 end
               ");;
+
+//(1)
+
+// let ex1 =
+//     inferType (fromString "let f x = 
+//                             1 in f f end");;
+
+// (2)
+// let ex2 =
+//     inferType (fromString "let f g = 
+//                             g g in f end");;
+
+//(3)
+// let ex3 =
+//     inferType (fromString "let f x = 
+//                             let g y = 
+//                             y in g false end 
+//                             in f 42 end");;
+
+//(4)
+// let ex5 =
+//     inferType (fromString "let f x =
+//                             let g y = if true then y else x
+//                             in g false end
+//                           in f 42 end");;
+
+//(5)
+// let ex5 =
+//     inferType (fromString "let f x =
+//                             let g y = if true then y else x
+//                             in g false end
+//                           in f true end");;

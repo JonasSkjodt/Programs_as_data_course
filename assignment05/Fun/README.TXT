@@ -70,7 +70,7 @@ F. Using the lexer, parser and polymorphic type inference together:
 
    fsyacc --module FunPar FunPar.fsy
    fslex --unicode FunLex.fsl
-   dotnet fsi -r ~/fsharp/FsLexYacc.Runtime.dll Util.fs Absyn.fs FunPar.fs FunLex.fs Parse.fs TypeInference.fs ParseAndType.fs
+   dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Util.fs Absyn.fs FunPar.fs FunLex.fs Parse.fs TypeInference.fs ParseAndType.fs
 
    open ParseAndType;;
    inferType (fromString "let f x = 1 in f 7 + f false end");;

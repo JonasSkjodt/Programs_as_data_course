@@ -22,13 +22,64 @@ and
     | FUN NAME ARROW Expr                 { Fun($2, $4)            }
 
 we then changed eval to accept Fun(x, body) and tested it with test2 and test3 in HigherFun.fs.
-See image ex6.2.png for results
+See image ex6_2_1.png and ex6_2.png for results
+
 
 6.3
+See image ex6_3 for results
 
 6.4
 
 6.5
 
+(1)
+inferType (fromString "let f x = 1 in f f end");;
+Works fine, gives type int back. It has a val it: string = "int"
 
+(2)
+inferType (fromString "let f g = g g in f end");;
+type error: circularity
+circularity: function parameter g cannot be applied to itself
+
+(3)
+inferType (fromString "let f x = let g y = y in g false end in f 42 end");;
+Works fine, gives type bool back. It has a val it: string = "bool"
+
+(4)
+inferType (fromString "let f x = let g y = if true then y else x in g false end in f 42 end");;
+System.Exception: type error: bool and int
+There's a conflict because it expects to have the same return type.
+From the code above, it has a chance to return a bool or an int, which results in an error.
+
+
+(5)
+inferType (fromString "let f x = let g y = if true then y else x in g false end in f true end");;
+Works fine, gives type bool back. It has a val it: string = "bool"
+
+
+6.5.2
+Remember that the type arrow (->) is right associative, so int -> int -> int is the same as
+int -> (int -> int), and that the choice of type
+variables does not matter, so the type scheme ’h -> ’g -> ’h is the same
+as a’ -> ’b -> ’a.
+
+• bool -> bool
+inferType (fromString "let f x = true in x end");;
+
+• int -> int
+inferType (fromString "let f x = 2 in x end");;
+
+• int -> int -> int
+inferType (fromString "let f x = let g y = 2 in g end 4 in x+y end");;
+
+• ’a -> ’b -> ’a
+inferType (fromString "let f x y = x in f ");;
+
+• ’a -> ’b -> ’b
+
+• (’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
+
+• ’a -> ’b
+
+• ’a
 

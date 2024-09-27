@@ -78,8 +78,8 @@ let run e = eval e [];;
 
 //ex 6.2
 let test1 = run (Prim("+", CstI 2, CstI 1))
-let test2 = eval (Fun("x", Prim("*", CstI 2, Var "x"))) []
-let test3 = eval (Let("y", CstI 22, Fun("z", Prim("+", Var "z", Var "y")))) []
+let test2 = run (Fun("x", Prim("*", CstI 2, Var "x")))
+let test3 = run (Let("y", CstI 22, Fun("z", Prim("+", Var "z", Var "y")))) 
 
 (* Examples in abstract syntax *)
 

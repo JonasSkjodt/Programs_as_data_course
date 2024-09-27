@@ -94,7 +94,32 @@ let ex13 =
      @"let add x = let f y = x+y in f end 
        in add 2 end";;
 
-//fun x -> 2*x
+//6.2
+// Fun("x", Prim("*", CstI 2, Var "x"))
 let ex14 = 
     Parse.fromString 
-     @"let f = fun x -> 2*x in f 3 end";;
+     @"fun x -> 2*x";;
+
+//let y = 22 in fun z -> z+y end
+let ex15 =
+    Parse.fromString
+     @"let y = 22 in fun z -> z+y end";;
+
+//6.3
+// let add x = fun y -> x+y
+// in add 2 5 end
+let ex16 =
+    Parse.fromString
+     @"let add x = fun y -> x+y
+        in add 2 5 end";;
+// let add = fun x -> fun y -> x+y
+// in add 2 5 end
+let ex17 =
+    Parse.fromString
+     @"let add = fun x -> fun y -> x+y 
+        in add 2 5 end";;
+
+//6.5 testing
+let ex18 =
+    Parse.fromString
+     @"let f x = 1 in f 7 + f false end";;
