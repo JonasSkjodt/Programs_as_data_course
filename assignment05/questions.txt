@@ -1,5 +1,8 @@
 5.7
-
+WTF
 
 Questions for TA
 6.2, is this correct? in eval, Fun(x, body) -> Clos(x, body, env)
+
+6.5
+On the last three ones

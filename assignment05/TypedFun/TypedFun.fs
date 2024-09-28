@@ -37,7 +37,7 @@ type typ =
   | TypI                                (* int                         *)
   | TypB                                (* bool                        *)
   | TypF of typ * typ                   (* (argumenttype, resulttype)  *)
-  | TypL of typ list                   (* ex5.7                       *)
+  | TypL of typ list                    (* ex5.7                       *) // need to ask ta
 
 (* New abstract syntax with explicit types, instead of Absyn.expr: *)
 
@@ -96,6 +96,12 @@ let rec eval (e : tyexpr) (env : value env) : int =
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "illegal function in Call"
+    // | ListExpr (exprList, _) ->
+    //    match exprList with
+    //    | [] -> i
+    //    | x::xs -> eval x env + eval (ListExpr(xs, TypI)) env
+    //    | _ -> failwith "ListExpr in eval went wrong"
+       
 
 (* Type checking for the first-order functional language: *)
 let rec typ (e : tyexpr) (env : typ env) : typ =
@@ -141,6 +147,15 @@ let rec typ (e : tyexpr) (env : typ env) : typ =
         else failwith "Call: wrong argument type"
       | _ -> failwith "Call: unknown function"
     | Call(_, eArg) -> failwith "Call: illegal function in call"
+    // | ListExpr (exprList, xTyp) -> // Run through the list and check if all the elements in list is of the type xTyp
+    //   match exprList with
+    //   | [] -> TypL [] // if the list is empty, return the type of the list
+    //   | x when (typ x env) <> xTyp -> failwith "ListExpr: Wrong type in list" //
+    //   | x::xs when x -> failwith "ListExpr: Wrong type in list" 
+    //   | x::xs -> typ (ListExpr(xs, xTyp)) env // if the list is not empty run through the list and check if the type is correct
+    //   | _ -> failwith "ListExpr: Something went wrong"
+
+    
 
 let typeCheck e = typ e [];;
 

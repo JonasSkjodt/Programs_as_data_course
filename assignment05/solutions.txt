@@ -2,12 +2,36 @@
 The F# merge function was created in the chap5.fsx file (see image ex5.1.png for results)
 The java merge method was created in LinkedList.java and its results printed from main
 
+
+
 5.7
 We changed TypL to accept a list in TypedFun/TypedFun.fs
 and then wondered what to do
 
+
+
 6.1
-we added our solutions as comments above the tests in ParseAndRunHigher.fs from line 63 to 95. (revise this later)
+we added our solutions as comments above the tests in ParseAndRunHigher.fs from line 63 to 95.
+We inserted the result of running the functions in the image ex.6_1.png.
+
+Ex10 
+val it: HigherFun.value = Int 7
+looks good!
+
+Ex11
+This function should be 7 since addtwo is a higher order function
+val it: HigherFun.value = Int 7
+
+Ex12
+yes it is expected, although let x = 77 introduces x with the value of 77,
+it does not affect the function addtwo due to not being in the same enclosure as the higher order function.
+So the result is 7 from addtwo 5.
+
+Ex13
+In this one function f doesnt have any value to add to x and therefore
+the function will be shown instead of a value.
+
+
 
 6.2
 We added Fun of string * expr to Absyn
@@ -25,12 +49,18 @@ we then changed eval to accept Fun(x, body) and tested it with test2 and test3 i
 See image ex6_2_1.png and ex6_2.png for results
 
 
+
 6.3
+We added tests for it in ParseAndRunHigher called ex16 ex17
 See image ex6_3 for results
+
+
 
 6.4
 
-6.5
+
+
+6.5 (1)
 
 (1)
 inferType (fromString "let f x = 1 in f f end");;
@@ -51,22 +81,13 @@ System.Exception: type error: bool and int
 There's a conflict because it expects to have the same return type.
 From the code above, it has a chance to return a bool or an int, which results in an error.
 
-
 (5)
 inferType (fromString "let f x = let g y = if true then y else x in g false end in f true end");;
 Works fine, gives type bool back. It has a val it: string = "bool"
 
 
-6.5.2
-Remember that the type arrow (->) is right associative, so int -> int -> int is the same as
-int -> (int -> int), and that the choice of type
-variables does not matter, so the type scheme ’h -> ’g -> ’h is the same
-as a’ -> ’b -> ’a.
 
-example:
-> let mul2 y = 2 * y;;
-val mul2: y: int -> int
-
+6.5 (2)
 
 • bool -> bool
 inferType (fromString "let f y = true = y in f end");;
@@ -83,18 +104,24 @@ val it: string = "(int -> (int -> int))"
 • ’a -> ’b -> ’a
 inferType (fromString "let f y = let g x =  if true then y else y in g end in f end");;
 val it: string = "('h -> ('g -> 'h))"
-
+    
 • ’a -> ’b -> ’b
 inferType (fromString "let f y = let g x =  if true then x else x in g end in f end");;
 val it: string = "('g -> ('h -> 'h))"
 
 • (’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
-inferType (fromString "let f y = let g x =  if true then x else x in g end in f end");;
+let compose f g = fun x -> g (f x)
+val compose: f: ('a -> 'b) -> g: ('b -> 'c) -> x: 'a -> 'c
 
+inferType (fromString "let compose f g = fun x -> g (f x) end");;
 
 • ’a -> ’b
+inferType (fromString "let f x = failwith \"Not implemented\" in f");;
+needs a lexer  
+inferType (fromString "let f x = if true then y else y in f end");;
 
 • ’a
+???????????
 
 
 
