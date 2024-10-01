@@ -5,8 +5,9 @@ The java merge method was created in LinkedList.java and its results printed fro
 
 
 5.7
-We changed TypL to accept a list in TypedFun/TypedFun.fs
-and then wondered what to do
+We made changes to the recursive call to typ to check the type TypL.
+We then made tests called ex7, ex8, and typestest.
+Their result is found in the image ex5_7.png
 
 
 
@@ -57,11 +58,11 @@ See image ex6_3 for results
 
 
 6.4
+See image ex6_4_1.png and ex6_4_2.png for results. (see note explain_type_note)
 
 
 
 6.5 (1)
-
 (1)
 inferType (fromString "let f x = 1 in f f end");;
 Works fine, gives type int back. It has a val it: string = "int"
@@ -87,37 +88,37 @@ Works fine, gives type bool back. It has a val it: string = "bool"
 
 
 
+
 6.5 (2)
 
-• bool -> bool
+bool -> bool
 inferType (fromString "let f y = true = y in f end");;
 val it: string = "(bool -> bool)"
 
-• int -> int
+int -> int
 inferType (fromString "let f y = 2 * y in f end");;
 val it: string = "(int -> int)"
 
-• int -> int -> int
+int -> int -> int
 inferType (fromString "let f y = let g x =  x * y in g end in f end");;
 val it: string = "(int -> (int -> int))"
 
-• ’a -> ’b -> ’a
+’a -> ’b -> ’a
 inferType (fromString "let f y = let g x =  if true then y else y in g end in f end");;
 val it: string = "('h -> ('g -> 'h))"
     
-• ’a -> ’b -> ’b
+’a -> ’b -> ’b
 inferType (fromString "let f y = let g x =  if true then x else x in g end in f end");;
 val it: string = "('g -> ('h -> 'h))"
 
-• (’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
+(’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
 inferType (fromString "let f1 x1 = let f2 x2 = let f3 x3 = x2 (x1 x3) in f3 end in f2 end in f1 end");;
 val it: string = "(('l -> 'k) -> (('k -> 'm) -> ('l -> 'm)))"
 
-• ’a -> ’b
+’a -> ’b
 inferType (fromString "let f x = f x in f end");;
 val it: string = "('e -> 'f)"
 
-• ’a
+’a
 inferType (fromString "let f x = f x in f 6 end");;
 val it: string = "'f"
-

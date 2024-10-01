@@ -37,7 +37,7 @@ type typ =
   | TypI                                (* int                         *)
   | TypB                                (* bool                        *)
   | TypF of typ * typ                   (* (argumenttype, resulttype)  *)
-  | TypL of typ                         (* ex5.7                       *) // need to ask ta
+  | TypL of typ                         (* ex5.7                       *)
 
 (* New abstract syntax with explicit types, instead of Absyn.expr: *)
 
@@ -96,11 +96,28 @@ let rec eval (e : tyexpr) (env : value env) : int =
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "illegal function in Call"
-    // | ListExpr (exprList, _) ->
+    
+    //ex5.7
+    // | ListExpr (exprList, t) ->
     //    match exprList with
-    //    | [] -> i
-    //    | x::xs -> eval x env + eval (ListExpr(xs, TypI)) env
+    //    | [] -> 
+    //    | x::xs -> eval x env :: eval (ListExpr(xs, t)) env
     //    | _ -> failwith "ListExpr in eval went wrong"
+    
+    
+    
+    // | ListExpr (exprList, t) -> 
+    //     let rec evalList e = 
+    //       match e with
+    //       | [] -> []
+    //       | x::xs -> (eval x env) :: (evalList xs)
+    //       | _ -> failwith "ListExpr in eval went wrong"
+    //     let list = evalList exprList
+    //     match t with
+    //     | TypI -> List.fold (fun x y -> x + y) 0 list
+    //     | TypB -> List.fold (fun x y -> x * y) 1 list
+    //     | TypL x -> List.length list
+    //     | _ -> failwith "ListExpr in eval went wrong"
        
 
 (* Type checking for the first-order functional language: *)
@@ -147,13 +164,22 @@ let rec typ (e : tyexpr) (env : typ env) : typ =
         else failwith "Call: wrong argument type"
       | _ -> failwith "Call: unknown function"
     | Call(_, eArg) -> failwith "Call: illegal function in call"
-    // | ListExpr (exprList, xTyp) -> // Run through the list and check if all the elements in list is of the type xTyp
-    //   match exprList with
-    //   | [] -> TypL [] // if the list is empty, return the type of the list
-    //   | x when (typ x env) <> xTyp -> failwith "ListExpr: Wrong type in list" //
-    //   | x::xs when x -> failwith "ListExpr: Wrong type in list" 
-    //   | x::xs -> typ (ListExpr(xs, xTyp)) env // if the list is not empty run through the list and check if the type is correct
-    //   | _ -> failwith "ListExpr: Something went wrong"
+    
+    //ex5.7
+    | ListExpr (exprList, xTyp) -> // Run through the list and check if all the elements in list is of the type xTyp
+        let rec checktyp e = // finds out what type xTyp is
+          match e with
+          | TypI -> TypI
+          | TypB -> TypB
+          | TypL x -> checktyp x
+          | _ -> failwith "ListExpr: type is not bool, int or list"
+        let oftyp = checktyp xTyp
+
+        match exprList with
+        | [] -> oftyp
+        | (xs::hs) when (typ xs env) = oftyp -> (typ (ListExpr(hs, oftyp)) env)
+        | _ -> failwith "ListExpr in typ went wrong"
+        
 
     
 
@@ -204,5 +230,10 @@ let exErr3 = Letfun("f", "x", TypB, Call(Var "f", CstI 22), TypI,
 let exErr4 = Letfun("f", "x", TypB, If(Var "x", CstI 11, CstI 22), TypB,
                     Call(Var "f", CstB true));;
 
-//typeL
-let ex7 = ListExpr([CstI 1; CstI 2; CstI 3], TypL [TypI]);;
+//ex 5.7 tests
+let ex7 = ListExpr([CstI 1; CstI 2; CstI 3;], TypL (TypI));;
+let ex8 = ListExpr([CstB true; CstB false; CstB true;], TypL (TypB));;
+
+let typestest = List.map typeCheck [ex7; ex8];;
+
+let evaltest = eval ex7 [];;
