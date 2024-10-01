@@ -37,7 +37,7 @@ type typ =
   | TypI                                (* int                         *)
   | TypB                                (* bool                        *)
   | TypF of typ * typ                   (* (argumenttype, resulttype)  *)
-  | TypL of typ list                    (* ex5.7                       *) // need to ask ta
+  | TypL of typ                         (* ex5.7                       *) // need to ask ta
 
 (* New abstract syntax with explicit types, instead of Absyn.expr: *)
 

@@ -51,7 +51,7 @@ See image ex6_2_1.png and ex6_2.png for results
 
 
 6.3
-We added tests for it in ParseAndRunHigher called ex16 ex17
+We added tests for it in ParseAndRunHigher called ex16 and ex17
 See image ex6_3 for results
 
 
@@ -110,21 +110,14 @@ inferType (fromString "let f y = let g x =  if true then x else x in g end in f 
 val it: string = "('g -> ('h -> 'h))"
 
 • (’a -> ’b) -> (’b -> ’c) -> (’a -> ’c)
-let compose f g = fun x -> g (f x)
-val compose: f: ('a -> 'b) -> g: ('b -> 'c) -> x: 'a -> 'c
-
-inferType (fromString "let compose f g = fun x -> g (f x) end");;
+inferType (fromString "let f1 x1 = let f2 x2 = let f3 x3 = x2 (x1 x3) in f3 end in f2 end in f1 end");;
+val it: string = "(('l -> 'k) -> (('k -> 'm) -> ('l -> 'm)))"
 
 • ’a -> ’b
-inferType (fromString "let f x = failwith \"Not implemented\" in f");;
-needs a lexer  
-inferType (fromString "let f x = if true then y else y in f end");;
+inferType (fromString "let f x = f x in f end");;
+val it: string = "('e -> 'f)"
 
 • ’a
-???????????
+inferType (fromString "let f x = f x in f 6 end");;
+val it: string = "'f"
 
-
-
-old examples
-inferType (fromString "let f y = let g x =  x * y in g end in f end");;
-val it: string = "(int -> (int -> int))"

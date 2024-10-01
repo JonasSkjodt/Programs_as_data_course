@@ -1,8 +1,11 @@
-5.7
-WTF
-
 Questions for TA
-6.2, is this correct? in eval, Fun(x, body) -> Clos(x, body, env)
+--5.7
+not sure
+
+--6.2, is this correct? in eval, Fun(x, body) -> Clos(x, body, env)
+
+6.4
+rule p3 ?
 
 6.5
 On the last three ones
