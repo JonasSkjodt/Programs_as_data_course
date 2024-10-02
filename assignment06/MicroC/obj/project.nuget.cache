@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "qPojF3o/mERv7Q2zmkpgobiy4njuoUHbN0vKjNQB9cMhLx78QzuOveTlj9XTo6eLq5Jl9mjF41smL5cBhINi4g==",
+  "success": true,
+  "projectFilePath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec05/MicroC/microcc.fsproj",
+  "expectedPackageFiles": [
+    "/Users/nh/.nuget/packages/fsharp.core/8.0.200/fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}
