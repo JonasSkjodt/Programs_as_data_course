@@ -41,7 +41,8 @@ C. To compile and use the backwards (continuation-based) micro-C compiler:
 
    fslex --unicode CLex.fsl
    fsyacc --module CPar CPar.fsy
-   dotnet fsi -r ~/fsharp/FsLexYacc.Runtime.dll Util.fs Absyn.fs CPar.fs CLex.fs Parse.fs Machine.fs Contcomp.fs ParseAndContcomp.fs   
+   //dotnet fsi -r ~/fsharp/FsLexYacc.Runtime.dll Util.fs Absyn.fs CPar.fs CLex.fs Parse.fs Machine.fs Contcomp.fs ParseAndContcomp.fs   
+   dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Util.fs Absyn.fs CPar.fs CLex.fs Parse.fs Machine.fs Contcomp.fs ParseAndContcomp.fs 
 
    open ParseAndContcomp;;
    contCompileToFile (fromFile "ex11.c") "ex11.out";;
