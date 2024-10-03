@@ -28,3 +28,11 @@
 /Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec05/MicroC/obj/Debug/net8.0/microcc.pdb
 /Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec05/MicroC/obj/Debug/net8.0/microcc.genruntimeconfig.cache
 /Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec05/MicroC/obj/Debug/net8.0/ref/microcc.dll
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.fsproj.AssemblyReference.cache
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.AssemblyInfoInputs.cache
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.AssemblyInfo.fs
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.fsproj.CoreCompileInputs.cache
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.sourcelink.json
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.dll
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/refint/microcc.dll
+/mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/assignment06/MicroC/obj/Debug/net8.0/microcc.pdb

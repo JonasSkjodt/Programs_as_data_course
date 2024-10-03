@@ -1,0 +1,16 @@
+in 7.2, why is it when we have only have sump set to int sump, instead of sump = 0. Why does it give 36 instead of 37. 
+
+when to do addresses and pointers properly?
+
+void squares(int n, int arr[]) {
+    int i;
+    i = 0;
+
+    while(i < n) {
+        arr[i] = i * i;
+        i = i + 1;
+    }
+}
+ref to AA_ex7_2_2.c why cant we insert <= in the while loop? right now it gives us an error "System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary."
+but it works fine with while (i < n) and still gives the correct answer of 2470. is < incluces?
+
