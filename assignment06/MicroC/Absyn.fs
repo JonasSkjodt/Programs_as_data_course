@@ -35,7 +35,9 @@ and stmt =
   | Expr of expr                     (* Expression statement   e;   *)
   | Return of expr option            (* Return from method          *)
   | Block of stmtordec list          (* Block: grouping and scope   *)
-                                                                   
+  (*for (i=0; i<100; i=i+1) sum = sum+i;*)
+  | For of stmt * expr * stmt * stmt (*Ex7.3 Forloop: for (init; test; update) body *)      
+
 and stmtordec =                                                    
   | Dec of typ * string              (* Local variable declaration  *)
   | Stmt of stmt                     (* A statement                 *)

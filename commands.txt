@@ -29,6 +29,7 @@ source /home/.bashrc
 
 alias fslex="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/fslex.dll"
 alias fsyacc="dotnet /mnt/c/Users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fsyacc/net6.0/fsyacc.dll"
+alias pad="cd /mnt/c/Users/jonas/Desktop/Programs_as_data/Programs_as_data_course/"
 
 //enter the hellolex folder and write the following
 //fslex --unicode hello.fsl

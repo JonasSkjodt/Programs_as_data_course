@@ -142,6 +142,9 @@ let rec exec stmt (locEnv : locEnv) (gloEnv : gloEnv) (store : store) : store =
           | [ ] -> store
           | s1::sr -> loop sr (stmtordec s1 locEnv gloEnv store)
       loop stmts (locEnv, store) 
+      
+    | For(init, test, update, body) ->
+
     | Return _ -> failwith "return not implemented"
 
 and stmtordec stmtordec locEnv gloEnv store = 
