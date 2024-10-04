@@ -16,6 +16,9 @@ A. Generating and compiling the lexer and parser for micro-C, and
    run (fromFile "AA_ex7_2_1.c") [];;
    run (fromFile "AA_ex7_2_2.c") [];;
    run (fromFile "AA_ex7_2_3.c") [];;
+   run (fromFile "AA_ex7_3_1.c") [];;
+   run (fromFile "AA_ex7_3_2.c") [];;
+   run (fromFile "AA_ex7_3_3.c") [];;
    run (fromFile "ex1.c") [17];;
    run (fromFile "ex5.c") [4];;
    run (fromFile "ex11.c") [8];;

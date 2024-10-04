@@ -142,8 +142,6 @@ let rec exec stmt (locEnv : locEnv) (gloEnv : gloEnv) (store : store) : store =
           | [ ] -> store
           | s1::sr -> loop sr (stmtordec s1 locEnv gloEnv store)
       loop stmts (locEnv, store) 
-      
-    | For(init, test, update, body) ->
 
     | Return _ -> failwith "return not implemented"
 
@@ -197,6 +195,11 @@ and eval e locEnv gloEnv store : int * store =
       let (i1, store1) as res = eval e1 locEnv gloEnv store
       if i1<>0 then res else eval e2 locEnv gloEnv store1
     | Call(f, es) -> callfun f es locEnv gloEnv store 
+
+    (*ex7.4 Modify the micro-C interpreter in Interp.fs to handle PreInc and PreDec.
+    You will need to modify the eval function, and use the getSto and setSto store
+    operations*)
+
 
 and access acc locEnv gloEnv store : int * store = 
     match acc with 
