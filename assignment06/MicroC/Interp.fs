@@ -64,8 +64,10 @@ type store = Map<address,int>
 
 let emptyStore = Map.empty<address,int>
 
+// update a given address with a given value
 let setSto (store : store) addr value = store.Add(addr, value)
 
+// gets the value of a given address
 let getSto (store : store) addr = store.Item addr
 
 let rec initSto loc n store = 
@@ -199,8 +201,22 @@ and eval e locEnv gloEnv store : int * store =
     (*ex7.4 Modify the micro-C interpreter in Interp.fs to handle PreInc and PreDec.
     You will need to modify the eval function, and use the getSto and setSto store
     operations*)
+    | PreInc e1 -> // e1 has to have been given a value, so that access can be used
+      let (loc_e1, store1) = access e1 locEnv gloEnv store // loc_e1 is the address/location of e1, and store1 is the place it is stored
+      let e1Val = getSto store1 loc_e1 // get the value of e1
+      let ValUpdate = (e1Val + 1)
+      let storeUpdate = setSto store1 loc_e1 ValUpdate // sets a new value to the address loc_e1 in store1
+      (loc_e1, storeUpdate) //gives back the address of e1 and store where the value as been updated/changed
+
+    | PreDec e1 -> // e1 has to have been given a value, so that access can be used
+      let (loc_e1, store1) = access e1 locEnv gloEnv store // loc_e1 is the address/location of e1, and store1 is the place it is stored
+      let e1Val = getSto store1 loc_e1 // get the value of e1
+      let ValUpdate = (e1Val - 1)
+      let storeUpdate = setSto store1 loc_e1 ValUpdate
+      (loc_e1, storeUpdate)
 
 
+// access gives back a address and the place the address is stored.
 and access acc locEnv gloEnv store : int * store = 
     match acc with 
     | AccVar x           -> (lookup (fst locEnv) x, store)
