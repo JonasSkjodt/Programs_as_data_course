@@ -206,17 +206,16 @@ and eval e locEnv gloEnv store : int * store =
       let e1Val = getSto store1 loc_e1 // get the value of e1
       let ValUpdate = (e1Val + 1)
       let storeUpdate = setSto store1 loc_e1 ValUpdate // sets a new value to the address loc_e1 in store1
-      (loc_e1, storeUpdate) //gives back the address of e1 and store where the value as been updated/changed
+      (ValUpdate, storeUpdate) //gives back the value of e1 and store where the value as been updated/changed
 
     | PreDec e1 -> // e1 has to have been given a value, so that access can be used
       let (loc_e1, store1) = access e1 locEnv gloEnv store // loc_e1 is the address/location of e1, and store1 is the place it is stored
       let e1Val = getSto store1 loc_e1 // get the value of e1
       let ValUpdate = (e1Val - 1)
       let storeUpdate = setSto store1 loc_e1 ValUpdate
-      (loc_e1, storeUpdate)
+      (ValUpdate, storeUpdate)
 
-
-// access gives back a address and the place the address is stored.
+// access gives back a value and the place the address is stored.
 and access acc locEnv gloEnv store : int * store = 
     match acc with 
     | AccVar x           -> (lookup (fst locEnv) x, store)

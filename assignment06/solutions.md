@@ -5,7 +5,7 @@ g { color: Green }
 </style>
 
 # 7.1
-We used fromFile "ex1.c";; to generate the following:
+We used fromFile "ex1.c" to generate the following:
 ```
 val it: Absyn.program =
   Prog 
@@ -112,9 +112,29 @@ When running "run (fromFile "AA_ex7_2_3.c") [];;"
 ```
 
 # 7.3
+In CPar.fsy we added the code beneath to StmtM.
+
+```
+| FOR LPAR Expr SEMI Expr SEMI Expr RPAR Stmt
+                                        { Block [Stmt(Expr($3)); Stmt(While($5, Block[Stmt($9); Stmt(Expr($7))]))] }
+```
+
+And inserted FOR into the tokens.
+
+We then rewrote the while loops in assigment 7.2 to be for loops. The rewritten files are 
+AA_ex7_3_1.c,
+AA_ex7_3_2.c,
+AA_ex7_3_3.c. 
 
 
 # 7.4
+We added PreInc and PreDec in interp.fs, with the necessary components to do increment and decrement. 
 
+Our tests are included in the files
+AA_ex7_4_1.c
+AA_ex7_4_2.c
+AA_ex7_4_3.c
 
 # 7.5
+We extended the syntax in absyn.fs, CLex.fsl and CPar.psy to include -- and ++ with a variable.
+The tests to see if it worked in are marked in 7.4
