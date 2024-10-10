@@ -4,7 +4,7 @@
 We have made all the numeric instruction in: Instruction.md
 
 (ii)
-We have compiled the ex3.c and ex5.c, analyzed the bytecode in instruction.md, and printed out the trace in ex3trace.txt and ex5trace.txt.
+We have compiled the ex3.c and ex5.c, analyzed the bytecode in the file instruction.md, and printed out the trace in the files ex3trace.txt and ex5trace.txt.
 
 We can see the nested scope's visability in ex5.c from the call in the symbolic instructions below:
 
@@ -21,3 +21,4 @@ The new stack frame being: <b>33 2 4 4</b>
 4 = res
 
 # 8.3
+
