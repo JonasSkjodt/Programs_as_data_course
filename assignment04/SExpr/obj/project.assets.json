@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Alexander\\.nuget\\packages\\": {}
+    "C:\\Users\\jonas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Code\\UNI\\Semester_5\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
+      "projectUniqueName": "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
       "projectName": "sexpr",
-      "projectPath": "d:\\Code\\UNI\\Semester_5\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
-      "packagesPath": "C:\\Users\\Alexander\\.nuget\\packages\\",
-      "outputPath": "d:\\Code\\UNI\\Semester_5\\Programs_as_data_course\\assignment04\\SExpr\\obj\\",
+      "projectPath": "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\sexpr.csproj",
+      "packagesPath": "C:\\Users\\jonas\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment04\\SExpr\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Alexander\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jonas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
