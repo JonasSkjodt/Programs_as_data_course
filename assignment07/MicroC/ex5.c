@@ -3,11 +3,13 @@
 void main(int n) {
   int r; 
   r = n;
+  
   { 
     int r;
     square(n, &r);
     print r;
   }
+  
   print r;
 }
 
