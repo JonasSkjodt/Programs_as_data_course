@@ -31,6 +31,9 @@ B. To compile and use the micro-C compiler
    fsyacc --module CPar CPar.fsy
    dotnet fsi -r /mnt/c/users/jonas/Desktop/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Util.fs Absyn.fs CPar.fs CLex.fs Parse.fs Machine.fs Comp.fs ParseAndComp.fs   
 
+   dotnet fsi -r /mnt/c/users/Semester_5/semester_5_PSD/fsharp/FsLexYacc.11.3.0/build/fslex/net6.0/FsLexYacc.Runtime.dll Util.fs Absyn.fs CPar.fs CLex.fs Parse.fs Machine.fs Comp.fs ParseAndComp.fs   
+
+
    open ParseAndComp;;
    compileToFile (fromFile "ex11.c") "ex11.out";;
    compileToFile (fromFile "AA_ex7_4_1.c") "AA_ex7_4_1.out";;

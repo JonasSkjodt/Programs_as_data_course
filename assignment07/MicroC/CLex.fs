@@ -221,7 +221,7 @@ and Token  lexbuf =
           )
   | 7 -> ( 
 # 57 "CLex.fsl"
-                                     DEC
+                                     DEC 
 # 225 "CLex.fs"
           )
   | 8 -> ( 

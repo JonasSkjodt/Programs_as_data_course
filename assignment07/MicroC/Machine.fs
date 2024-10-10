@@ -128,8 +128,8 @@ let makelabenv (addr, labenv) instr =
     | LDARGS         -> (addr+1, labenv)
     | STOP           -> (addr+1, labenv)
     //8.3
-    | INC            -> (addr+1, labenv)
-    | DEC            -> (addr+1, labenv)
+    // | INC            -> (addr+1, labenv)
+    // | DEC            -> (addr+1, labenv)
 
 (* Bytecode emission, second pass: output bytecode as integers *)
 
