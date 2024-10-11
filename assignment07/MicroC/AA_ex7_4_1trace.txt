@@ -1,0 +1,36 @@
+[ ]{0: LDARGS}
+[ 4 ]{1: CALL 1 5}
+[ 4 -999 4 ]{5: INCSP 1}
+// ^ starting the function
+// 4                -999                    4               0
+//return addr       old base pointer        s               i
+
+[ 4 -999 4 0 ]{7: GETBP}                    -> base pointer to i's addr -> 2 (2 is the index number)
+[ 4 -999 4 0 2 ]{8: CSTI 1}                 -> push int 1 to the stack
+[ 4 -999 4 0 2 1 ]{10: ADD}                 -> pops two elements on top of the stack and then pushes the result of the addition on top of the stack 
+[ 4 -999 4 0 3 ]{11: CSTI 5}                -> push int 5 to the stack
+[ 4 -999 4 0 3 5 ]{13: STI}                 -> stores indirect : the index number of i(2) is given the value of 5  
+[ 4 -999 4 5 5 ]{14: INCSP -1}              -> Now that the value has been stored to index 4, the program knows it doesnt need the value anymore, so it pops it
+[ 4 -999 4 5 ]{16: INCSP 1}                 ->
+[ 4 -999 4 5 5 ]{18: GETBP}                 -> [2] svar til int i
+[ 4 -999 4 5 5 2 ]{19: CSTI 2}              -> sætter 2 på stacken 
+[ 4 -999 4 5 5 2 2 ]{21: ADD}               -> tager to element ud fra stacken og pluser
+[ 4 -999 4 5 5 4 ]{22: GETBP}               -> 
+[ 4 -999 4 5 5 4 2 ]{23: CSTI 1}
+[ 4 -999 4 5 5 4 2 1 ]{25: ADD}
+[ 4 -999 4 5 5 4 3 ]{26: DUP}
+[ 4 -999 4 5 5 4 3 3 ]{27: LDI}
+[ 4 -999 4 5 5 4 3 5 ]{28: CSTI 1}
+[ 4 -999 4 5 5 4 3 5 1 ]{30: ADD}
+[ 4 -999 4 5 5 4 3 6 ]{31: STI}
+[ 4 -999 4 6 5 4 6 ]{32: STI}
+[ 4 -999 4 6 6 6 ]{33: INCSP -1}
+[ 4 -999 4 6 6 ]{35: GETBP}
+[ 4 -999 4 6 6 2 ]{36: CSTI 2}
+[ 4 -999 4 6 6 2 2 ]{38: ADD}
+[ 4 -999 4 6 6 4 ]{39: LDI}
+[ 4 -999 4 6 6 6 ]{40: PRINTI}
+6 [ 4 -999 4 6 6 6 ]{41: INCSP -1}
+[ 4 -999 4 6 6 ]{43: INCSP -2}
+[ 4 -999 4 ]{45: RET 0}
+[ 4 ]{4: STOP}
