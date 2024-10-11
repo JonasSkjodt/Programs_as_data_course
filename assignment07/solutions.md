@@ -25,4 +25,7 @@ We have inserted the correct code to cExpr in comp.fs
 We explored the explenation in traceExplenation.txt.
 
 # 8.4
+We have compiled it into the files ex8.out and prog1.out.
 
+ex8.c uses STI to save the value while prog1 uses DUP to always keep the value on the top of the stack.
+This requires a lot less code, which make it overall faster.

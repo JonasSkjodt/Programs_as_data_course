@@ -1,0 +1,36 @@
+24 19 0 5 25 15 1 13 0 0 1 0 20000000 12 15 -1 16 35 13 0 0 1 13 0 0 1 11 0 1 2 12 15 -1 15 0 13 0 0 1 11 18 18 15 -1 21 -1
+
+//program start
+Stack       symbolic instructions
+0           : LDARGS
+1           : CALL 0 5
+4           : STOP
+
+//main
+5           : INCSP 1
+7           : GETBP
+8           : CSTI 0
+10          : ADD
+11          : CSTI 20000000
+13          : STI
+14          : INCSP -1       
+16          : GOTO 35       //while loop start    
+18          : GETBP
+19          : CSTI 0     
+21          : ADD
+22          : GETBP
+23          : CSTI 0
+25          : ADD
+26          : LDI
+27          : CSTI 1
+29          : SUB
+30          : STI
+31          : INCSP -1
+33          : INCSP 0
+35          : GETBP         //for more operations goes to while loop start
+36          : CSTI 0
+38          : ADD
+39          : LDI
+40          : IFNZRO 18     // while end
+42          : INCSP -1
+44          : RET -1
