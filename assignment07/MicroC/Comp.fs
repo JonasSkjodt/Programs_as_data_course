@@ -207,9 +207,16 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
       @ [GOTO labend; Label labtrue; CSTI 1; Label labend]
     | Call(f, es) -> callfun f es varEnv funEnv
     //8.3
-    //| PreInc acc -> cAccess acc varEnv funEnv accCode @
-
-    // | PreDec acc -> cAccess acc varEnv funEnv
+    // "cAccess acc varEnv funEnv" generates the code to access the address of acc.
+    // DUP duplicates the top value on the stack (which is the address of acc)                It has two copies of the address of acc on the stack now.
+    // LDI loads the value on the address of acc onto the stack.                              It has the value and the address of acc on the stack now.
+    // CSTI 1 then pushes the constant 1 onto the stack.                                      It has the value, the address of acc and 1 on the stack now.
+    // ADD adds 1 to the value on the address of acc (SUB for PreDec since it subtracts 1).   It has the value and the address of acc on the stack now.
+    // STI stores the incremented value back to the address of acc.                           It has the value on the stack now.
+    | PreInc acc -> 
+      cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; ADD; STI]
+    | PreDec acc -> 
+      cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; SUB; STI]
 
 (* Generate code to access variable, dereference pointer or index array.
    The effect of the compiled code is to leave an lvalue on the stack.   *)
