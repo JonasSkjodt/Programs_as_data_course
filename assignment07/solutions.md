@@ -21,4 +21,8 @@ The new stack frame being: <b>33 2 4 4</b>
 4 = res
 
 # 8.3
+We have inserted the correct code to cExpr in comp.fs
+We explored the explenation in traceExplenation.txt.
+
+# 8.4
 

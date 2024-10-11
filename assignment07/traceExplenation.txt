@@ -1,0 +1,36 @@
+[ ]{0: LDARGS}
+[ 4 ]{1: CALL 1 5}
+[ 4 -999 4 ]{5: INCSP 1}
+// ^ starting the function
+// 4                -999                    4               0
+//return addr       old base pointer        s               i
+
+[ 4 -999 4 0 ]{7: GETBP}                    -> base pointer to i's addr -> 2 (2 is the index number)
+[ 4 -999 4 0 2 ]{8: CSTI 1}                 -> push int 1 to the stack
+[ 4 -999 4 0 2 1 ]{10: ADD}                 -> pops two elements on top of the stack and then pushes the result of the addition on top of the stack 
+[ 4 -999 4 0 3 ]{11: CSTI 5}                -> push int 5 to the stack
+[ 4 -999 4 0 3 5 ]{13: STI}                 -> stores indirect : the index number of i(2) is given the value of 5  
+[ 4 -999 4 5 5 ]{14: INCSP -1}              -> Now that the value has been stored to index 4, the program knows it doesnt need the value anymore, so it pops it (shrinks the stack)
+[ 4 -999 4 5 ]{16: INCSP 1}                 -> It grows the stack because there is a new variable introduced, int n 
+[ 4 -999 4 5 5 ]{18: GETBP}                 -> Gets the index from the base pointer
+[ 4 -999 4 5 5 2 ]{19: CSTI 2}              -> push int 2 to the stack 
+[ 4 -999 4 5 5 2 2 ]{21: ADD}               -> pops two elements on top of the stack and then pushes the result of the addition on top of the stack 
+[ 4 -999 4 5 5 4 ]{22: GETBP}               -> Gets the index from the base pointer
+[ 4 -999 4 5 5 4 2 ]{23: CSTI 1}            -> push int 1 to the stack 
+[ 4 -999 4 5 5 4 2 1 ]{25: ADD}             -> (same as the other adds, but...) : the purpose of this add is to get a pointer to where i is located on stack
+[ 4 -999 4 5 5 4 3 ]{26: DUP}               -> Dublicates the top value on the stack because the following operations needs it's value but we still needs it's addr for the later operation
+[ 4 -999 4 5 5 4 3 3 ]{27: LDI}             -> it then loads the value of i (which is 5 in this case) into the index
+[ 4 -999 4 5 5 4 3 5 ]{28: CSTI 1}          -> push int 1 to the stack
+[ 4 -999 4 5 5 4 3 5 1 ]{30: ADD}           -> Adds again : this is now the new value that should be stored in n and i
+[ 4 -999 4 5 5 4 3 6 ]{31: STI}             -> Now it indirectly stores the newest stack value (6) (where it does the operation s,i,v =>  s,v) because the code has ++i, its i that will be updated first. Hence why its stores indirect s[i] = v (s[3] = 6)
+[ 4 -999 4 6 5 4 6 ]{32: STI}               -> Now it indirectly stores the newest stack value (6) into n (since n = ++i) (s[4] = 6)
+[ 4 -999 4 6 6 6 ]{33: INCSP -1}            -> Now that the value (n) has been stored to index 5, the program knows it doesnt need the value anymore, so it pops it (shrinks the stack)
+[ 4 -999 4 6 6 ]{35: GETBP}                 -> We push the base pointer again (2) to the stack, So that we can create a pointer to the addr of n
+[ 4 -999 4 6 6 2 ]{36: CSTI 2}              -> push int 2 to the stack 
+[ 4 -999 4 6 6 2 2 ]{38: ADD}               -> adds again, since n's addr is at s[4]
+[ 4 -999 4 6 6 4 ]{39: LDI}                 -> It now loads the indirect value (6) and pushes it to the index, so that has the value on top of stack for next operation  
+[ 4 -999 4 6 6 6 ]{40: PRINTI}              -> We now print the value of the top of our stack, which is 6
+6 [ 4 -999 4 6 6 6 ]{41: INCSP -1}          -> There are no more operations, so the program knows it doesnt need the value anymore, so it pops it (shrinks the stack)
+[ 4 -999 4 6 6 ]{43: INCSP -2}              -> There are no more operations, so the program knows it doesnt need the value anymore, so it pops it (shrinks the stack)
+[ 4 -999 4 ]{45: RET 0}                     -> returns 
+[ 4 ]{4: STOP}                              -> Stop the program
