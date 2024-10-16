@@ -42,8 +42,10 @@ B. To compile and use the micro-C compiler
    compile "ex11";;
 
    
-   compileToFile (fromFile "AA_ex7_4_1.c") "AA_ex7_4_1.out";;
+   compileToFile (fromFile "AA_ex_4_1.c") "AA_ex7_4_1.out";;
    java Machinetrace AA_ex7_4_1.out 4 > AA_ex7_4_1trace.txt
+
+   compileToFile (fromFile "AA_ex8_5.c") "AA_ex8_5.out";;
 
 The Java stack machine:
 

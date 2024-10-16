@@ -26,6 +26,8 @@ and expr =
   (*ex7.4*)
   | PreInc of access                 (* C/C++/Java/C# ++i or ++a[e] *)
   | PreDec of access                 (* C/C++/Java/C# --i or --a[e] *)
+  (*ex8.5*)
+  | Ternary of expr * expr * expr    (* e1 ? e2 : e3                *)     
                                                                    
 and access =                                                       
   | AccVar of string                 (* Variable access        x    *) 
@@ -39,7 +41,11 @@ and stmt =
   | Return of expr option            (* Return from method          *)
   | Block of stmtordec list          (* Block: grouping and scope   *)
   (*for (i=0; i<100; i=i+1) sum = sum+i;*)
-  //| For of expr * expr * expr * stmt (*Ex7.3 Forloop: for (init; test; update) body *)      
+  //| For of expr * expr * expr * stmt (*Ex7.3 Forloop: for (init; test; update) body *) 
+  (*ex8.5*)
+  (*| Ternary of expr * expr * expr*)    (* e1 ? e2 : e3                *)
+  (*ex8.6*)
+  | Switch of expr * (int * stmt) list (* SWitch case: something *)
 
 and stmtordec =                                                    
   | Dec of typ * string              (* Local variable declaration  *)

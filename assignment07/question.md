@@ -11,3 +11,14 @@ ESP (Stack Pointer) is the current stack pointer, which will change any time a w
 
 
 Hvad er symboliserer index tal 2 i tracen? (7.4.1) Vi tror 4 er argumentet (s).
+
+
+e1 ? e2 : e3 i filen AA_ex8_5.c
+
+burde vi ikke få print n når vi siger 0 ? print n : print i;
+og print i når vi laver 1 ? print n : print i;
+
+..
+
+cExpr e1 varEnv funEnv @ [IFZERO labelse] 
+      @ cExpr e2 varEnv funEnv @ [GOTO labend]
