@@ -3,8 +3,8 @@ void main() {
     month = 2;
     int days;
     int y;
-    y = 8;
-
+    y = 7;
+    
     switch (month) {
         case 1:
             { days = 31; }
@@ -13,4 +13,6 @@ void main() {
         case 3:
             { days = 31; }
     }
+
+    print days;
 }

@@ -70,7 +70,7 @@ Works fine, gives type int back. It has a val it: string = "int"
 (2)
 inferType (fromString "let f g = g g in f end");;
 type error: circularity
-circularity: function parameter g cannot be applied to itself
+circularity: function parameter g cannot be applied to itself (type failure, g cant be polymorphic in body of f)
 
 (3)
 inferType (fromString "let f x = let g y = y in g false end in f 42 end");;

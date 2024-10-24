@@ -1,8 +1,8 @@
-Hvordan ser stacken ud efter man har kaldt til et label?
- Label "L1";                                       |5:  
- 
+
 
 bp ændrer sig når en parameter er indsat, hvad er den tekniske forklaring på dette?
+[ 4 4 -999 ]
+[ 4 -999 4 ]
  
 på side 143 i bogen, hvorfor vælger old bp lige "n" til at være dens reference fra sidste fac(_,_) udregning? 
 

@@ -122,7 +122,7 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       cExpr e varEnv funEnv @ [IFZERO labelse] 
       @ cStmt stmt1 varEnv funEnv @ [GOTO labend]
       @ [Label labelse] @ cStmt stmt2 varEnv funEnv
-      @ [Label labend]           
+      @ [Label labend]
     | While(e, body) ->
       let labbegin = newLabel()
       let labtest  = newLabel()
@@ -146,9 +146,19 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       cExpr e varEnv funEnv @ [RET (snd varEnv)]
     
     //ex 8.6
-    //| Switch (e, case) ->
+    | Switch (e, cases) -> 
+      let labend = newLabel()
       
+      // Since we want to be able to jump to each case, then adding a label to each case, would do that
+      let casesWithLabels = List.map (fun (i, stmt) -> (i, stmt, newLabel())) cases // we use a label for each case
       
+      // This will now take the new list with labels in them and build instruction from it
+      let instruction = List.fold (fun acc (i, stmt, lab) -> // fold over each case
+        cExpr e varEnv funEnv @ [CSTI i; EQ; IFZERO lab] @ // This part is simply checking if the expr is equal to the nummer of the case
+        [Label lab] @ cStmt stmt varEnv funEnv @ [GOTO labend] @ acc) [] casesWithLabels  // This part is inside the case. Making sure that has the right labels to go to
+
+      instruction @ [Label labend]
+
 
 and cStmtOrDec stmtOrDec (varEnv : varEnv) (funEnv : funEnv) : varEnv * instr list = 
     match stmtOrDec with 
@@ -212,7 +222,7 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
       @ cExpr e2 varEnv funEnv
       @ [GOTO labend; Label labtrue; CSTI 1; Label labend]
     | Call(f, es) -> callfun f es varEnv funEnv
-    //8.3
+    //ex8.3
     // "cAccess acc varEnv funEnv" generates the code to access the address of acc.
     // DUP duplicates the top value on the stack (which is the address of acc)                It has two copies of the address of acc on the stack now.
     // LDI loads the value on the address of acc onto the stack.                              It has the value and the address of acc on the stack now.

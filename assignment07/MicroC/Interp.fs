@@ -144,6 +144,18 @@ let rec exec stmt (locEnv : locEnv) (gloEnv : gloEnv) (store : store) : store =
           | [ ] -> store
           | s1::sr -> loop sr (stmtordec s1 locEnv gloEnv store)
       loop stmts (locEnv, store) 
+   
+    //ex8.6
+    | Switch (e, cases) ->
+        let (evalE, store1) = eval e locEnv gloEnv store
+        let rec findCase cases1 = 
+          match cases1 with
+          | [] -> failwith "No cases matched"
+          | x :: xs when fst(x) = evalE -> exec (snd x) locEnv gloEnv store1
+          | _ :: xs -> findCase xs
+          // | x :: xs -> exec ( Switch(e, xs) locEnv gloEnv store)
+        findCase cases
+
 
     | Return _ -> failwith "return not implemented"
 
@@ -197,6 +209,11 @@ and eval e locEnv gloEnv store : int * store =
       let (i1, store1) as res = eval e1 locEnv gloEnv store
       if i1<>0 then res else eval e2 locEnv gloEnv store1
     | Call(f, es) -> callfun f es locEnv gloEnv store 
+
+    | Ternary(e1, e2, e3) -> 
+      let (v, store1) = eval e1 locEnv gloEnv store
+      if v<>0 then eval e2 locEnv gloEnv store1
+              else eval e3 locEnv gloEnv store1
 
     (*ex7.4 Modify the micro-C interpreter in Interp.fs to handle PreInc and PreDec.
     You will need to modify the eval function, and use the getSto and setSto store
