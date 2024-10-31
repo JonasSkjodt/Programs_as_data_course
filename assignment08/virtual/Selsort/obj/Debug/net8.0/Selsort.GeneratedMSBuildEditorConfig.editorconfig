@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Selsort
-build_property.ProjectDir = /Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/
+build_property.ProjectDir = C:\Users\jonas\Desktop\Programs_as_data\Programs_as_data_course\assignment08\virtual\Selsort\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

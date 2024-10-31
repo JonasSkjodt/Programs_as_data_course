@@ -8,24 +8,26 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/Users/nh/.nuget/packages/": {}
+    "C:\\Users\\jonas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/Selsort.csproj",
+      "projectUniqueName": "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment08\\virtual\\Selsort\\Selsort.csproj",
       "projectName": "Selsort",
-      "projectPath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/Selsort.csproj",
-      "packagesPath": "/Users/nh/.nuget/packages/",
-      "outputPath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/",
+      "projectPath": "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment08\\virtual\\Selsort\\Selsort.csproj",
+      "packagesPath": "C:\\Users\\jonas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jonas\\Desktop\\Programs_as_data\\Programs_as_data_course\\assignment08\\virtual\\Selsort\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/nh/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\jonas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -64,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

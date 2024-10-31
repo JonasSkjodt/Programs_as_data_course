@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Selsort")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9851ee770359452c37efc7cefe721bef14026e6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Selsort")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Selsort")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
