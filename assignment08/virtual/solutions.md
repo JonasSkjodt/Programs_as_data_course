@@ -11,10 +11,9 @@ Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler i
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 ```
 
-The problem is there is no garbage collector
+The problem is that the next from first in the get function is never used again, but it isnt set to null, so the garbage collector cant throw it away.
 
-
-This code could be a way to deal with garbage collection
+This code could be a way to deal with better garbage collection
 
 ```
 public synchronized int get() {
